@@ -2,12 +2,12 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Starter Kit",
   "logo": {
-    "dark": "/logo/dark.svg",
+    "dark": "/logo/camelqa-dark.svg",
     "light": "/logo/light.svg"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/qaml-favicon.svg",
   "colors": {
-    "primary": "#0D9373",
+    "primary": "#000000",
     "light": "#07C983",
     "dark": "#0D9373",
     "anchors": {
