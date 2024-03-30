@@ -5,9 +5,9 @@
     "dark": "/logo/camelqa-dark.svg",
     "light": "/logo/camelqa-light.svg"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "favicon.png",
   "colors": {
-    "primary": "#000000",
+    "primary": "#08254B",
     "light": "#07C983",
     "dark": "#0D9373",
     "anchors": {
@@ -29,6 +29,10 @@
     {
       "name": "API Reference",
       "url": "api-reference"
+    },
+    {
+      "name": "Blog",
+      "url": "blog"
     }
   ],
   "anchors": [
@@ -41,11 +45,6 @@
       "name": "Community",
       "icon": "slack",
       "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
     }
   ],
   "navigation": [
@@ -54,7 +53,8 @@
       "pages": [
         "introduction",
         "quickstart",
-        "development"
+        "development",
+        "new"
       ]
     },
     {
@@ -75,6 +75,12 @@
       ]
     },
     {
+      "group": "Blog",
+      "pages": [
+        "blog/home"
+      ]
+    },
+    {
       "group": "Endpoint Examples",
       "pages": [
         "api-reference/endpoint/get",
@@ -84,8 +90,9 @@
     }
   ],
   "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "twitter": "https://twitter.com/camelQA",
+    "github": "https://github.com/qaml-ai",
+    "linkedin": "https://www.linkedin.com/company/camelqa",
+    "youtube": "https://www.youtube.com/channel/UCDwycyxNe0_FFgL6TeFrLaw"
   }
 }
