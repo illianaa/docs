@@ -3,9 +3,9 @@
   "name": "Starter Kit",
   "logo": {
     "dark": "/logo/camelqa-dark.svg",
-    "light": "/logo/light.svg"
+    "light": "/logo/camelqa-light.svg"
   },
-  "favicon": "/qaml-favicon.svg",
+  "favicon": "/background.svg",
   "colors": {
     "primary": "#000000",
     "light": "#07C983",
@@ -18,12 +18,12 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:support@camelqa.com"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://dash.camelqa.com/login"
   },
   "tabs": [
     {
