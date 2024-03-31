@@ -47,20 +47,11 @@
       "group": "Get Started",
       "pages": [
         "introduction",
+        "pricing",
+        "faq",
         "quickstart",
         "development",
         "new"
-      ]
-    },
-    {
-      "group": "Essentials",
-      "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
       ]
     },
     {
@@ -86,7 +77,6 @@
     {
       "group": "Trouble Shooting",
       "pages": [
-        "trouble-shooting/faq",
         "trouble-shooting/known-issues"
       ]
     }
