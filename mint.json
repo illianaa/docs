@@ -7,12 +7,12 @@
   },
   "favicon": "favicon.png",
   "colors": {
-    "primary": "#08254B",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#2162C7",
+    "light": "#81ABEE",
+    "dark": "#2162C7",
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#2162C7",
+      "to": "#41BAFF" 
     }
   },
   "topbarLinks": [
@@ -37,14 +37,9 @@
   ],
   "anchors": [
     {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
       "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
+      "icon": "discord",
+      "url": "https://discord.gg/8X4bWNeF"
     }
   ],
   "navigation": [
@@ -86,6 +81,13 @@
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",
         "api-reference/endpoint/delete"
+      ]
+    },
+    {
+      "group": "Trouble Shooting",
+      "pages": [
+        "trouble-shooting/faq",
+        "trouble-shooting/known-issues"
       ]
     }
   ],
