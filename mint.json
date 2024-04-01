@@ -44,14 +44,18 @@
   ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "General",
       "pages": [
         "introduction",
-        "pricing",
         "faq",
+        "pricing"
+      ]
+    },
+    {
+      "group": "Get Started",
+      "pages": [
         "quickstart",
-        "development",
-        "new"
+        "development"
       ]
     },
     {
