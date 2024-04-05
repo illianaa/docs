@@ -27,6 +27,10 @@
   },
   "tabs": [
     {
+      "name": "API Reference",
+      "url": "api-reference"
+    },
+    {
       "name": "Blog",
       "url": "blog"
     }
@@ -55,9 +59,23 @@
       ]
     },
     {
+      "group": "API Documentation",
+      "pages": [
+        "api-reference/introduction"
+      ]
+    },
+    {
       "group": "Blog",
       "pages": [
         "blog/home"
+      ]
+    },
+    {
+      "group": "Endpoint Examples",
+      "pages": [
+        "api-reference/endpoint/get",
+        "api-reference/endpoint/create",
+        "api-reference/endpoint/delete"
       ]
     },
     {
