@@ -4,12 +4,33 @@ description: 'How to create automation scripts'
 icon: 'code'
 ---
 
+## Python library
+You can use qaml from Python to automate tasks in natural language. Initialize the qaml client with your API key and then start executing commands:
+
 ```python
 import qaml
 
 q = qaml.Client(api_key="<API_KEY>")
 
+q.execute("tap the address bar")
+q.execute("type camelqa.com")
+q.execute("tap go")
+q.execute("scroll down")
+q.execute("open the apple music app")
+...
+```
+
+## Appium integration
+qaml integrates with Appium so you can use your existing Appium client and server configurations. To use a custom Appium configuration pass an Appium driver instance to the qaml Client constructor:
+
+```python
+import qaml
+
+q = qaml.Client(driver=appium_driver, api_key="<API_KEY>")
+
 q.execute("<NATURAL_LANGUAGE_COMMAND>")
 ...
 ```
+
+Using your own Appium driver allows you to easily integrate with device clouds like [SauceLabs](https://saucelabs.com) and [BrowserStack](https://www.browserstack.com)
 
