@@ -17,8 +17,11 @@ icon: 'timer'
   </Accordion>
   <Accordion icon="rectangle-terminal" title="Run Appium in your terminal">
     Ensure your are running [appium](https://appium.io/docs/en/2.5/quickstart/install/) on your machine
+	Use Homebrew on macOS or follow the instructions above.
+	`brew install appium`
   </Accordion>
   <Accordion icon="rectangle-terminal" title="Ensure you have mjpeg-consumer on your machine">
+    Using mjpeg-consumer is optional; however, it is strongly recommended because it significantly speeds up execution.
     Here's how to install `mjpeg-consumer` on your machine. Navigate to your appium directory.
     ```
     cd `which appium`/..
@@ -46,6 +49,10 @@ icon: 'timer'
 
 
 ### Install qaml and start controling your device in natural language
+
+<Info>
+  **IMPORTANT** Generate an API key on our [frontend](https://dash.camelqa.com/login)
+</Info>
 
 ```
 pip install qaml
