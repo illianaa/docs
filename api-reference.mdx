@@ -1,0 +1,68 @@
+---
+title: 'API Reference'
+description: 'Python library API reference'
+icon: 'code'
+---
+
+# Client
+To Initialize a python client for camelQA, you must pass in an API key and optionally these parameters:
+
+```python
+q = qaml.Client(
+    api_key="<API_KEY>, 
+    driver=optional_appium_driver, #optional
+    use_mjpeg=optional_boolean, #optional, default=True
+    use_hid_typing=optional_boolean #optional, default=False
+)
+```
+#### driver
+This is the Appium driver instance you can use to specify your UDID for your device or simulator. This can also be used to connect to a device farm.
+
+Tip: 
+```bash
+xcrun simctl list devices | grep 'Booted'
+```
+This command gives you a list of UDIDs of all simulators currently running.
+
+#### use_mjpeg
+This flag tells qaml to use `mjpeg_consumer` if it is installed. This will speed up the time it takes to capture a screenshot, but is slightly resource intensive. If you have issues, try turning setting this to False.
+
+#### use_hid_typing
+This is an experimental feature to extend typing compatibility. This is for apps where typing is not supported by Appium. This flag simulates a USB keyboard. This is slow and only works with latin characters and numbers.
+
+Please let us know in our Discord how this feature works for your app. 
+
+# execute
+This is the main way you interact with qaml. Give a natural language command and it will execute the command. 
+
+```python
+q.execute("tap the address bar")
+q.execute("type camelqa.com")
+q.execute("tap go")
+q.execute("scroll down")
+q.execute("open the apple music app")
+...
+```
+
+Nothing is returned. A `QAMLExecException` will be thrown if it is unable to execute the command.
+
+## assert_condition
+This is how you tell qaml to verify something without taking any action. 
+
+```python
+q.execute("type camelqa.com")
+q.assert_condition("camelqa.com is shown")
+q.execute("tap go")
+q.assert_condition("loading screen is shown")
+...
+```
+
+Nothing is returned. A `QAMLExecException` will be thrown if the condition is not met.
+
+# system_prompt
+This appends information to the qaml system prompt. Use this to specify details about your app. 
+
+```python
+q.system_prompt = "Never scroll down, even if the user asks for it."
+...
+```
