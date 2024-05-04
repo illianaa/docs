@@ -4,33 +4,19 @@ description: 'Tips on how to prompt qaml'
 icon: 'terminal'
 ---
 
-## Python library
-You can use qaml from Python to automate tasks in natural language. Initialize the qaml client with your API key and then start executing commands:
+qaml uses AI to turn your natural language into app automations. Aside from the basic qaml commands, `q.execute()`, `q.assert_condition()`, and `q.system_prompt ()`, there are other quirks that we've noticed. 
 
+Please use this guide as best practices when issuing commands to qaml.
+
+## App Switching
+**Switch to \<app name\> app** 
+
+This is the command for opening an app or switching between apps. This performs more consistently than "Open the \<app name\> app". 
+
+Example:
 ```python
-import qaml
-
-q = qaml.Client(api_key="<API_KEY>")
-
-q.execute("tap the address bar")
-q.execute("type camelqa.com")
-q.execute("tap go")
-q.execute("scroll down")
-q.execute("open the apple music app")
-...
+q.execute("Switch to Apple Music app")
+q.asssert("We are in the Apple Music app") # optional, used to confirm the app switch was successful
 ```
 
-## Appium integration
-qaml integrates with Appium so you can use your existing Appium client and server configurations. To use a custom Appium configuration pass an Appium driver instance to the qaml Client constructor:
-
-```python
-import qaml
-
-q = qaml.Client(driver=appium_driver, api_key="<API_KEY>")
-
-q.execute("<NATURAL_LANGUAGE_COMMAND>")
-...
-```
-
-Using your own Appium driver allows you to easily integrate with device clouds like [SauceLabs](https://saucelabs.com) and [BrowserStack](https://www.browserstack.com)
 

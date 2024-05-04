@@ -53,7 +53,8 @@
         "quickstart",
         "development",
         "api-reference", 
-        "appium"
+        "appium",
+        "prompt-guide"
       ]
     },
     {
@@ -65,7 +66,8 @@
     {
       "group": "Trouble Shooting",
       "pages": [
-        "trouble-shooting/known-issues"
+        "trouble-shooting/known-issues",
+        "trouble-shooting/icon-list"
       ]
     }
   ],
