@@ -6,10 +6,41 @@ icon: 'timer'
 
 # Setup in Xcode (fastest for those without Appium)
 
+### Setup Xcode
 
+1. Open an existing project in Xcode
+2. In the top menu bar go to File -> Add package dependencies
+3. In the search field in the top right corner paste https://github.com/qaml-ai/qaml-swift
+4. Click add package
+5. Select your UITest target, NOT your main app target
+6. Start writing tests!
+
+### Writing Tests in qaml-swift
+
+1. Go to a test File
+2. Include `Import qaml` at the top
+3. Create a new test function:
+
+```
+    @MainActor
+    func testSearching() async throws {
+        // UI tests must launch the application that they test.
+        let app = XCUIApplication(bundleIdentifier: "com.apple.mobilesafari")
+        app.launch()
+        
+        let q = QamlClient(apiKey: "sk-209e6c3a003b698ef98abd009f1a1a6bda39aa544bcb8bde279f39114a6f2b4a", app: app)
+        
+        try await q.execute("type google.com into the search bar at the bottom")
+        try await q.execute("tap go")
+        try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
+        try await q.execute("scroll down")
+        try await q.assertCondition("The screen shows google's site")
+    }
+```
 
 # Setup in Python (repl support)
 
+### Setup Your Machine
 <AccordionGroup>
   <Accordion icon="mobile" title="Plug in a phone">
     Plug in an Anriod or iPhone to your machine. If no devices are connected it will fallback to the iOS Simulator.
