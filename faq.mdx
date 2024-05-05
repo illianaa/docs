@@ -3,12 +3,12 @@ title: "FAQs"
 description: "Common questions"
 icon: 'seal-question'
 ---
-### Can you reverse engineer our source code from our ipa/apk file?
-We cannot reverse engineer source code from an app and we do not need any source code access.
+### Do I need to add accessibility labels to my code?
+No. camelQA uses vision to detect elements on your screen and execute code to tap, swipe, type and more to complete the desired action. 
 
 
-### If I change my app, do I have to update camelQA?
-Our model is self-healing, meaning you won’t need to update your script for minor changes. If you use our reasoning model, you won't need to update your scripts for most changes.
+### If I change my app, do I have to update my camelQA scripts?
+You won’t need to update your script for minor changes (ex. change in button placement), but you will have to update you script if you introduce new flows (ex. adding a step to your onboarding process)
 
 
 ### Do I have to write my own test cases?
@@ -24,7 +24,7 @@ We do not train our models on your app.
 
 
 ### Do you retain any data from my app?
-CamelQA does not retain any data from your app and does not allow OpenAI to retain any of your data.
+CamelQA does not retain any data from your app and does not allow OpenAI to retain any of your data. We work by taking a screenshot of your app, sending that screenshot to our servers and using AI to generate the code to complete the next step. 
 
 
 ### What devices can I use to run camelQA?

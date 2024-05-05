@@ -7,7 +7,7 @@ icon: 'timer'
   **IMPORTANT** Generate an API key on our [frontend](https://dash.camelqa.com/login)
 </Info>
 
-# Xcode 
+# Getting started with Xcode 
 iOS only - fastest for those without Appium
 
 ### Setup Xcode
@@ -28,11 +28,11 @@ iOS only - fastest for those without Appium
 ```swift
     @MainActor
     func testSearching() async throws {
-        // UI tests must launch the application that they test.
+        // Set the bundle ID of the app you'd like to test
         let app = XCUIApplication(bundleIdentifier: "com.apple.mobilesafari")
         app.launch()
         
-        let q = QamlClient(apiKey: "sk-209e6c3a003b698ef98abd009f1a1a6bda39aa544bcb8bde279f39114a6f2b4a", app: app)
+        let q = QamlClient(apiKey: "<api key>", app: app)
         
         try await q.execute("type google.com into the search bar at the bottom")
         try await q.execute("tap go")
@@ -42,7 +42,7 @@ iOS only - fastest for those without Appium
     }
 ```
 
-# Python 
+# Getting started with Python 
 iOS and Adroid - Requires Appium setup
 
 ### Setup Your Machine
