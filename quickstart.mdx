@@ -42,9 +42,15 @@ iOS only - fastest for those without Appium setup on their machine
         try await q.assertCondition("The screen shows google's site")
     }
 ```
+4. Select the device you'd like to run your test on at the top. 
+    - For physical devices, attach your device to your computer via USB. 
+    - For simulated devices, select your desired device from the drop down menu.
+    - For third party device farms, following their XCUITest documentation. [AWS Docs](https://docs.aws.amazon.com/devicefarm/latest/developerguide/test-types-ios-xctest-ui.html), [Sauce Labs Docs](https://docs.saucelabs.com/mobile-apps/automated-testing/espresso-xcuitest/), [Browserstack Docs](https://www.browserstack.com/docs/app-automate/api-reference/xcuitest/overview). 
+
+<Note>If you have XCode cloud set up, these tests will run as part of your Xcode cloud actions. Apple offers iOS developers 25 hours of free device farm access per month. Read more about this on [Xcode's documentaiton](https://developer.apple.com/xcode-cloud/#:~:text=Apple%20Developer%20Program%20membership%20includes,Cloud%20monthly%20subscriptions%20are%20available.&text=Upgrade%20or%20downgrade%20your%20subscription%20at%20any%20time. "Xcode Cloud Subscription").</Note> 
 
 # Getting started with Python 
-iOS and Adroid - Requires Appium setup
+iOS and Adroid - Requires Appium and WebDriverAgent setup
 
 ### Setup Your Machine
 <AccordionGroup>
