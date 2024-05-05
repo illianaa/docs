@@ -3,8 +3,12 @@ title: 'Quickstart'
 description: 'Start coding in camelQA'
 icon: 'timer'
 ---
+<Info>
+  **IMPORTANT** Generate an API key on our [frontend](https://dash.camelqa.com/login)
+</Info>
 
-# Setup in Xcode (fastest for those without Appium)
+# Xcode 
+iOS only - fastest for those without Appium
 
 ### Setup Xcode
 
@@ -21,7 +25,7 @@ icon: 'timer'
 2. Include `Import qaml` at the top
 3. Create a new test function:
 
-```
+```swift
     @MainActor
     func testSearching() async throws {
         // UI tests must launch the application that they test.
@@ -38,7 +42,8 @@ icon: 'timer'
     }
 ```
 
-# Setup in Python (repl support)
+# Python 
+iOS and Adroid - Requires Appium setup
 
 ### Setup Your Machine
 <AccordionGroup>
@@ -83,10 +88,6 @@ icon: 'timer'
 
 
 ### Install qaml and start controling your device in natural language
-
-<Info>
-  **IMPORTANT** Generate an API key on our [frontend](https://dash.camelqa.com/login)
-</Info>
 
 ```
 pip install qaml
