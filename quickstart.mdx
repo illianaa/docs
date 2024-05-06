@@ -27,18 +27,18 @@ iOS only - Fastest for those without Appium setup on their machine
 
 ```swift
     @MainActor
-    func testSearching() async throws {
+    func testAppleNews() async throws {
         // Set the bundle ID of the app you'd like to test
-        let app = XCUIApplication(bundleIdentifier: "com.apple.mobilesafari")
+        let app = XCUIApplication(bundleIdentifier: "com.apple.news")
         app.launch()
         
         let q = QamlClient(apiKey: "<api key>", app: app)
         
-        try await q.execute("type google.com into the search bar at the bottom")
-        try await q.execute("tap go")
+        try await q.execute("click the sports tab")
         try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
         try await q.execute("scroll down")
-        try await q.assertCondition("The screen shows google's site")
+        try await q.execute("tap the first image")
+        try await q.assertCondition("The screen shows a Get Started button")
     }
 ```
 4. Select the device you'd like to run your test on at the top. 
