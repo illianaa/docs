@@ -69,7 +69,6 @@ This is the main way you interact with qaml. Give a natural language command and
     try await q.execute("tap go")
     try await q.execute("scroll down")
     try await q.execute("open the apple music app")
-    ...
     ```
     ```python python
     q.execute("tap the address bar")
@@ -77,7 +76,6 @@ This is the main way you interact with qaml. Give a natural language command and
     q.execute("tap go")
     q.execute("scroll down")
     q.execute("open the apple music app")
-    ...
     ```
 </CodeGroup>
     
@@ -92,14 +90,12 @@ This is how you tell qaml to verify something without taking any action.
     try await q.assert_condition("camelqa.com is shown")
     try await q.execute("tap go")
     try await q.assert_condition("loading screen is shown")
-    ...
     ```
     ```python python
     q.execute("type camelqa.com")
     q.assert_condition("camelqa.com is shown")
     q.execute("tap go")
     q.assert_condition("loading screen is shown")
-    ...
     ```
 </CodeGroup>
 
@@ -111,11 +107,9 @@ This appends information to the qaml system prompt. Use this to specify details 
 <CodeGroup>
 ```swift swift
 q.systemPrompt = "Never scroll down, even if the user asks for it."
-...
 ```
 ```python python
 q.system_prompt = "Never scroll down, even if the user asks for it."
-...
 ```
 </CodeGroup>
 
@@ -125,12 +119,10 @@ This is how to switch between apps.
 <CodeGroup>
     ```swift swift
     try await q.switchToApp(bundleId: "com.apple.mobilesafari")
-    ...
     ```
     ```python python
     # use bundleID or package
     q.switch_to_app("com.apple.mobilesafari")
-    ...
     ```
 </CodeGroup>
 
@@ -140,10 +132,8 @@ This is how to open a specific URL.
 <CodeGroup>
     ```swift swift
     try await q.openURL(url: "https://en.m.wikipedia.org/wiki/Artificial_intelligence")
-    ...
     ```
     ```python python
     # not supported in python at this time
-    ...
     ```
 </CodeGroup>
