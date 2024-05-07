@@ -8,33 +8,57 @@ icon: 'code'
   **Recommended** Run `pip install -U qaml` to update to the latest verison of qaml
   </Info>
 
-## Python library
-You can use qaml from Python to automate tasks in natural language. Initialize the qaml client with your API key and then start executing commands:
+<Tabs>
+  <Tab title="Swift">
+    ## Swift package
+    You can use qaml from XCUITest to automate tasks in natural language. Initialize the qaml client with your API key and then start executing commands:
 
-```python
-import qaml
+    ```swift
+    import qaml
 
-q = qaml.Client(api_key="<API_KEY>")
+    // Set the bundle ID of the app you'd like to test
+    let app = XCUIApplication(bundleIdentifier: "com.toyopagroup.picaboo")
+    app.launch()
 
-q.execute("tap the address bar")
-q.execute("type camelqa.com")
-q.execute("tap go")
-q.execute("scroll down")
-q.execute("open the apple music app")
-...
-```
+    let q = QamlClient(apiKey: "<API_KEY>", app: "<APP_INSTANCE>")
 
-## Appium integration
-qaml integrates with Appium so you can use your existing Appium client and server configurations. To use a custom Appium configuration pass an Appium driver instance to the qaml Client constructor:
+    try await q.execute("tap the address bar")
+    try await q.execute("type camelqa.com")
+    ```
 
-```python
-import qaml
+    ## XCode Cloud integration
+    If you have XCode cloud set up, these tests will run as part of your Xcode cloud actions. Apple offers iOS developers 25 hours of free device farm access per month. Read more about this on [Xcode’s documentation](https://developer.apple.com/xcode-cloud/#:~:text=Apple%20Developer%20Program%20membership%20includes,Cloud%20monthly%20subscriptions%20are%20available.&text=Upgrade%20or%20downgrade%20your%20subscription%20at%20any%20time.).
 
-q = qaml.Client(driver=appium_driver, api_key="<API_KEY>")
+  </Tab>
+  <Tab title="Python">
+    ## Python library
+    You can use qaml from Python to automate tasks in natural language. Initialize the qaml client with your API key and then start executing commands:
 
-q.execute("<NATURAL_LANGUAGE_COMMAND>")
-...
-```
+    ```python
+    import qaml
 
-Using your own Appium driver allows you to easily integrate with device clouds like [SauceLabs](https://saucelabs.com) and [BrowserStack](https://www.browserstack.com)
+    q = qaml.Client(api_key="<API_KEY>")
 
+    q.execute("tap the address bar")
+    q.execute("type camelqa.com")
+    q.execute("tap go")
+    q.execute("scroll down")
+    q.execute("open the apple music app")
+    ...
+    ```
+
+    ## Appium integration
+    qaml integrates with Appium so you can use your existing Appium client and server configurations. To use a custom Appium configuration pass an Appium driver instance to the qaml Client constructor:
+
+    ```python
+    import qaml
+
+    q = qaml.Client(driver=appium_driver, api_key="<API_KEY>")
+
+    q.execute("<NATURAL_LANGUAGE_COMMAND>")
+    ...
+    ```
+
+    Using your own Appium driver allows you to easily integrate with device clouds like [SauceLabs](https://saucelabs.com) and [BrowserStack](https://www.browserstack.com)
+  </Tab>
+</Tabs>
