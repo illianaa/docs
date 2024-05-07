@@ -7,106 +7,130 @@ icon: 'timer'
   **IMPORTANT** Generate an API key on our [frontend](https://dash.camelqa.com/login)
 </Info>
 
-# Getting started with Xcode 
-iOS only - Fastest for those without Appium setup on their machine
+<Tabs>
+  <Tab title="Swift">
+    # Getting started with Xcode 
+    iOS only - Fastest for those without Appium setup on their machine
 
-### Setup Xcode
+    ### Setup Xcode
 
-1. Open an existing project in Xcode
-2. In the top menu bar go to File -> Add package dependencies
-3. In the search field in the top right corner paste https://github.com/qaml-ai/qaml-swift
-4. Click add package
-5. Select your UITest target, NOT your main app target
-6. Start writing tests!
+    <Steps>
+      <Step title="Open Xcode">
+        Open an existing project or create a new project in Xcode.
+      </Step>
+      <Step title="Add package dependency">
+        In the top menu bar go to File -> Add package dependencies
+      </Step>
+      <Step title="Search for package">
+        In the search field in the top right corner paste https://github.com/qaml-ai/qaml-swift
+      </Step>
+      <Step title="Click add package.">
+      </Step>
+      <Step title="Select target">
+        Select your UITest target, NOT your main app target.
+      </Step>
+    </Steps>
 
-### Writing Tests in qaml-swift
+    ### Writing Tests in qaml-swift
 
-1. Go to a test File
-2. Include `import qaml` at the top
-3. Create a new test function:
+    <Steps>
+      <Step title="Go to a test File">
+      </Step>
+      <Step title="Import qaml">
+        Include `import qaml` at the top of your test file
+      </Step>
+      <Step title="Create a new test function">
+      Example test:
+        ```swift
+        @MainActor
+        func testAppleNews() async throws {
+            // Set the bundle ID of the app you'd like to test
+            let app = XCUIApplication(bundleIdentifier: "com.apple.news")
+            app.launch()
+            
+            let q = QamlClient(apiKey: "<api key>", app: app)
+            
+            try await q.execute("click the sports tab")
+            try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
+            try await q.execute("scroll down")
+            try await q.execute("tap the first image")
+            try await q.assertCondition("The screen shows a Get Started button")
+        }
+    ```
+      </Step>
+      <Step title="Select your device">
+        Select the device you'd like to run your test on at the top. 
+          > - For physical devices, attach your device to your computer via USB. 
+          > - For simulated devices, select your desired device from the drop down menu.
+          > - For third party device farms, following their XCUITest documentation.
+          > - [AWS Docs](https://docs.aws.amazon.com/devicefarm/latest/developerguide/test-types-ios-xctest-ui.html), [Sauce Labs Docs](https://docs.saucelabs.com/mobile-apps/automated-testing/espresso-xcuitest/), [Browserstack Docs](https://www.browserstack.com/docs/app-automate/api-reference/xcuitest/overview). 
 
-```swift
-    @MainActor
-    func testAppleNews() async throws {
-        // Set the bundle ID of the app you'd like to test
-        let app = XCUIApplication(bundleIdentifier: "com.apple.news")
-        app.launch()
+        <Note>
+          If you have XCode cloud set up, these tests will run as part of your Xcode cloud actions. Apple offers iOS developers 25 hours of free device farm access per month.
+          Read more about this on [Xcode's documentation](https://developer.apple.com/xcode-cloud/#:~:text=Apple%20Developer%20Program%20membership%20includes,Cloud%20monthly%20subscriptions%20are%20available.&text=Upgrade%20or%20downgrade%20your%20subscription%20at%20any%20time. "Xcode Cloud Subscription").
+        </Note> 
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="Python">
+    # Getting started with Python 
+    iOS and Adroid - Requires Appium and WebDriverAgent setup
+
+    ### Setup Your Machine
+    <AccordionGroup>
+      <Accordion icon="mobile" title="Plug in a phone">
+        Plug in an Android or iPhone to your machine. If no devices are connected it will fallback to the iOS Simulator.
+      <Info>
+      **IMPORTANT** Ensure your device has [developer mode](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device) turned on. 
+      </Info>
+
+      </Accordion>
+      <Accordion icon="rectangle-terminal" title="Run Appium in your terminal">
+        Ensure your are running [appium](https://appium.io/docs/en/2.5/quickstart/install/) on your machine.
+        Use Homebrew on macOS `brew install appium` or follow the instructions linked above.
         
-        let q = QamlClient(apiKey: "<api key>", app: app)
-        
-        try await q.execute("click the sports tab")
-        try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
-        try await q.execute("scroll down")
-        try await q.execute("tap the first image")
-        try await q.assertCondition("The screen shows a Get Started button")
-    }
-```
-4. Select the device you'd like to run your test on at the top. 
-  > - For physical devices, attach your device to your computer via USB. 
-  > - For simulated devices, select your desired device from the drop down menu.
-  > - For third party device farms, following their XCUITest documentation.
-  > - [AWS Docs](https://docs.aws.amazon.com/devicefarm/latest/developerguide/test-types-ios-xctest-ui.html), [Sauce Labs Docs](https://docs.saucelabs.com/mobile-apps/automated-testing/espresso-xcuitest/), [Browserstack Docs](https://www.browserstack.com/docs/app-automate/api-reference/xcuitest/overview). 
-
-<Note>
-  If you have XCode cloud set up, these tests will run as part of your Xcode cloud actions. Apple offers iOS developers 25 hours of free device farm access per month.
-  Read more about this on [Xcode's documentation](https://developer.apple.com/xcode-cloud/#:~:text=Apple%20Developer%20Program%20membership%20includes,Cloud%20monthly%20subscriptions%20are%20available.&text=Upgrade%20or%20downgrade%20your%20subscription%20at%20any%20time. "Xcode Cloud Subscription").
-</Note> 
-
-# Getting started with Python 
-iOS and Adroid - Requires Appium and WebDriverAgent setup
-
-### Setup Your Machine
-<AccordionGroup>
-  <Accordion icon="mobile" title="Plug in a phone">
-    Plug in an Android or iPhone to your machine. If no devices are connected it will fallback to the iOS Simulator.
-  <Info>
-  **IMPORTANT** Ensure your device has [developer mode](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device) turned on. 
-  </Info>
-
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Run Appium in your terminal">
-    Ensure your are running [appium](https://appium.io/docs/en/2.5/quickstart/install/) on your machine.
-	  Use Homebrew on macOS `brew install appium` or follow the instructions linked above.
-	  
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Ensure you have mjpeg-consumer on your machine">
-    Using mjpeg-consumer is optional; however, it is strongly recommended because it significantly speeds up execution.
-    Here's how to install `mjpeg-consumer` on your machine. Navigate to your appium directory.
-    ```
-    cd `which appium`/..
-    ```
-    Install `mjpeg-consumer`.
-    ```
-    npm i mjpeg-consumer
-    ```
-    Optionally, navigate back to your previous directory
-    ```
-    cd -
-    ```
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Spin up your virtual environment">
-    Create your VE 
-    ```
-    python3 -m venv .venv
-    ```
-    Activate your VE
-    ```
-    source .venv/bin/activate
-    ```
-  </Accordion>
-</AccordionGroup>
+      </Accordion>
+      <Accordion icon="rectangle-terminal" title="Ensure you have mjpeg-consumer on your machine">
+        Using mjpeg-consumer is optional; however, it is strongly recommended because it significantly speeds up execution.
+        Here's how to install `mjpeg-consumer` on your machine. Navigate to your appium directory.
+        ```
+        cd `which appium`/..
+        ```
+        Install `mjpeg-consumer`.
+        ```
+        npm i mjpeg-consumer
+        ```
+        Optionally, navigate back to your previous directory
+        ```
+        cd -
+        ```
+      </Accordion>
+      <Accordion icon="rectangle-terminal" title="Spin up your virtual environment">
+        Create your VE 
+        ```
+        python3 -m venv .venv
+        ```
+        Activate your VE
+        ```
+        source .venv/bin/activate
+        ```
+      </Accordion>
+    </AccordionGroup>
 
 
-### Install qaml and start controling your device in natural language
+    ### Install qaml and start controling your device in natural language
 
-```
-pip install qaml
-```
+    ```
+    pip install qaml
+    ```
 
-Or update the CLI with `pip install -U qaml`
+    Or update the CLI with `pip install -U qaml`
 
-Set the QAML_API_KEY environment variable to your API key
-```
-export QAML_API_KEY=<API_KEY>
-```
-Start using qaml in python or command line
+    Set the QAML_API_KEY environment variable to your API key
+    ```
+    export QAML_API_KEY=<API_KEY>
+    ```
+    Start using qaml in python or command line
+  </Tab>
+</Tabs>
