@@ -53,8 +53,8 @@
         "quickstart",
         "development",
         "api-reference", 
-        "appium",
-        "prompt-guide"
+        "prompt-guide",
+        "appium"
       ]
     },
     {

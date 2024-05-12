@@ -1,33 +1,39 @@
 ---
 title: 'Prompt Guide'
-description: 'Tips on how to prompt qaml'
+description: 'How to prompt qaml'
 icon: 'terminal'
 ---
 
-qaml uses AI to turn your natural language into app automations. Aside from the basic qaml commands, `q.execute()`, `q.assert_condition()`, and `q.system_prompt ()`, there are other quirks that we've noticed. 
+qaml uses AI to turn your natural language into app automations. [qaml actions](https://docs.camelqa.com/api-reference) are used for device level control. However, there are additional controls you can specify in the prompt.
 
 Please use this guide as best practices when issuing commands to qaml.
 
-## App Switching
-**Switch to \<app name\> app** 
+## Long Press
+**Long press the \<button name\> button** 
 
-This is the command for opening an app or switching between apps. This performs more consistently than "Open the \<app name\> app". 
+This is the command to tap and hold on a region. By defualt, this holds down for 3 seconds.
 
 Example:
 ```python
-q.execute("Switch to Apple Music app")
-q.asssert("We are in the Apple Music app") # optional, used to confirm the app switch was successful
+q.execute("Long press the record button")
 ```
 
 ## Tapping Images
-**Switch to \<app name\> app** 
+**Images are not identified at this time** 
 
-This is the command for opening an app or switching between apps. This performs more consistently than "Open the \<app name\> app". 
+Images are treated as a black box in vision mode. The model knows that there is an image and it knows the coordinates, but it does not know what the image is.
+
+Aside from the wait_until and assert commands, qaml cannot see images within an app. Note, this is not true if you are using accessibility mode. Accessibility mode uses device level labels which may include image descriptions.
+
+We recommend you use placement queues to interact with specific images. **Note,** icon buttons are *not* images and can be interacted with directly.
 
 Example:
 ```python
-q.execute("Switch to Apple Music app")
-q.asssert("We are in the Apple Music app") # optional, used to confirm the app switch was successful
+# assert uses a vision model to see and evaluate the screen
+q.asssert("There is a carousel of images of coffee tables") 
+
+# execute does not use vision on images. Use labels and positioning to interact with images.
+q.execute("Tap the image under the header Coffee Tables") 
 ```
 
 

@@ -101,6 +101,18 @@ This is how you tell qaml to verify something without taking any action.
 
 Nothing is returned. A `QAMLExecException` will be thrown if the condition is not met.
 
+## wait_until (Swift only)
+An iteration of assert, this is how you tell qaml to wait until an event occurs (ex. screen has completed loading)
+
+<CodeGroup>
+    ```swift swift
+    try await q.waitUntil("Results page has completed loading")
+    ```
+    ```python python
+    # not supported in python at this time
+    ```
+</CodeGroup>
+
 ## system_prompt
 This appends information to the qaml system prompt. Use this to specify details about your app. 
 
@@ -137,3 +149,4 @@ This is how to open a specific URL.
     # not supported in python at this time
     ```
 </CodeGroup>
+
