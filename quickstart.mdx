@@ -29,14 +29,17 @@ icon: 'timer'
       <Step title="Open Xcode">
         Open an existing project or create a new project in Xcode.
 
-        If you're creating a new project, make 
-        <Frame>
-          <img width="400" src="/images/create-new-xcode1.png" />
-        </Frame>
-        <Frame>
-          <img width="400" src="/images/create-new-xcode2.png" />
-        </Frame>
-
+        Follow these steps if you're creating a new project.
+        <Accordion title="Choose App.">
+          <Frame>
+            <img width="400" src="/images/create-new-xcode1.png" />
+          </Frame>
+        </Accordion>
+        <Accordion title="Ensure Include Tests is checked.">
+          <Frame>
+            <img width="400" src="/images/create-new-xcode2.png" />
+          </Frame>
+        </Accordion>
       </Step>
       <Step title="Add package dependency">
         In the top menu bar go to File -> Add package dependencies
@@ -93,84 +96,160 @@ icon: 'timer'
     </Steps>
   </Tab>
   
+
+
+
+
   <Tab title="Android">
     # Getting started with Android Studio
     Android only - **Fastest way to get started**, for those without Appium setup on their machine
 
     ### Setup Andoid Studio
 
-    <iframe
-      width="560"
-      height="315"
-      src="https://www.youtube.com/embed/AojmVBgShm4"
-      title="YouTube video player"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-    ></iframe>
-
-
     <Steps>
-      <Step title="Open Xcode">
-        Open an existing project or create a new project in Xcode.
+      <Step title="Open Andoid Studio">
+        Open an existing project or create a new project. We support both Kotlin DSL and Groovy.
       </Step>
-      <Step title="Add package dependency">
-        In the top menu bar go to File -> Add package dependencies
+      <Step title="Add camelQA repo">
+        Add the camelQA repository to your Gradle build settings.
+        <CodeGroup>
+          ```java Groovy/Java
+            pluginManagement {
+              repositories {
+                google {
+                  content {
+                    includeGroupByRegex("com\\.android.*")
+                    includeGroupByRegex("com\\.google.*")
+                    includeGroupByRegex("androidx.*")
+                  }
+                }
+                mavenCentral()
+                gradlePluginPortal()
+                // Adding your custom Maven repository
+                maven {
+                  url "https://cdn.camelqa.com/"
+                }
+              }
+            }
+
+            dependencyResolutionManagement {
+              repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+              repositories {
+                google()
+                mavenCentral()
+                // Adding your custom Maven repository
+                maven {
+                  url "https://cdn.camelqa.com/"
+                }
+              }
+            }
+          ```
+
+          ```kotlin Kotlin DSL
+            pluginManagement {
+              repositories {
+                google {
+                  content {
+                    includeGroupByRegex("com\\.android.*")
+                    includeGroupByRegex("com\\.google.*")
+                    includeGroupByRegex("androidx.*")
+                  }
+                }
+                mavenCentral()
+                gradlePluginPortal()
+                // Adding your custom Maven repository
+                maven {
+                  url = uri("https://cdn.camelqa.com/")
+                }
+              }
+            }
+
+            dependencyResolutionManagement {
+              repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+              repositories {
+                google()
+                mavenCentral()
+                // Adding your custom Maven repository
+                maven {
+                  url = uri("https://cdn.camelqa.com/")
+                }
+              }
+            }
+          ```
+          </CodeGroup>
+
       </Step>
-      <Step title="Search for package">
-        In the search field in the top right corner paste https://github.com/qaml-ai/qaml-swift
+        <Step title="Add camelQA dependency">
+        Add the camelQA library dependency to your Gradle build file.
+        <CodeGroup>
+          ```java Groovy/Java
+            dependencies {
+              androidTestImplementation 'com.camelqa:qaml:1.0.0'
+            }
+          ```
+
+          ```kotlin Kotlin DSL
+            dependencies {
+              androidTestImplementation("com.camelqa:qaml:1.0.0")
+            }
+          ```
+          </CodeGroup>
+
       </Step>
-      <Step title="Click add package.">
-      </Step>
-      <Step title="Select target">
-        Select your UITest target, NOT your main app target.
+      <Step title="Import qaml from your Android Instrumented Tests">
+        <CodeGroup>
+          ```java Groovy/Java
+            import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+            import org.junit.Test;
+            import org.junit.runner.RunWith;
+            import com.camelqa.qaml.Client;
+
+            @RunWith(AndroidJUnit4.class)
+            public class ExampleInstrumentedTest {
+
+
+              @Test
+              public void testAppleSite() {
+                Client q = new Client("<API_KEY>");
+                q.openURL("https://apple.com");
+                q.execute("tap shop button");
+                q.execute("tap the first product");
+              }
+            }
+          ```
+          ```kotlin Kotlin DSL
+            import androidx.test.ext.junit.runners.AndroidJUnit4
+
+            import org.junit.Test
+            import org.junit.runner.RunWith
+
+            import com.camelqa.qaml.Client as QamlClient
+
+            @RunWith(AndroidJUnit4::class)
+            class ExampleInstrumentedTest {
+              @Test
+              fun testAppleSite() {
+                val q = QamlClient(apiKey = "<API_KEY>")
+                q.openURL("https://apple.com")
+                q.execute("tap shop button")
+                q.execute("tap the first product")
+              }
+            }
+          ```
+        </CodeGroup>
       </Step>
     </Steps>
 
-    ### Writing Tests in qaml-swift
-
-    <Steps>
-      <Step title="Go to a test File">
-      </Step>
-      <Step title="Import qaml">
-        Include `import qaml` at the top of your test file
-      </Step>
-      <Step title="Create a new test function">
-      Example test:
-        ```swift
-        @MainActor
-        func testAppleNews() async throws {
-            // Set the bundle ID of the app you'd like to test
-            let app = XCUIApplication(bundleIdentifier: "com.apple.news")
-            app.launch()
-            
-            let q = QamlClient(apiKey: "<api key>", app: app)
-            
-            try await q.execute("click the sports tab")
-            try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
-            try await q.execute("scroll down")
-            try await q.execute("tap the first article")
-            try await q.assertCondition("The screen shows a Get Started button")
-        }
-    ```
-      </Step>
-      <Step title="Select your device">
-        Select the device you'd like to run your test on at the top. 
-          > - For physical devices, attach your device to your computer via USB. 
-          > - For simulated devices, select your desired device from the drop down menu.
-          > - For third party device farms, following their XCUITest documentation.
-          > - [AWS Docs](https://docs.aws.amazon.com/devicefarm/latest/developerguide/test-types-ios-xctest-ui.html), [Sauce Labs Docs](https://docs.saucelabs.com/mobile-apps/automated-testing/espresso-xcuitest/), [Browserstack Docs](https://www.browserstack.com/docs/app-automate/api-reference/xcuitest/overview). 
-
-        <Note>
-          If you have XCode cloud set up, these tests will run as part of your Xcode cloud actions. Apple offers iOS developers 25 hours of free device farm access per month.
-          Read more about this on [Xcode's documentation](https://developer.apple.com/xcode-cloud/#:~:text=Apple%20Developer%20Program%20membership%20includes,Cloud%20monthly%20subscriptions%20are%20available.&text=Upgrade%20or%20downgrade%20your%20subscription%20at%20any%20time. "Xcode Cloud Subscription").
-        </Note> 
-      </Step>
-    </Steps>
   </Tab>
 
+
+
+
   <Tab title="Appium">
-    # Getting started with Python 
+    # Getting started with Appium
+    **Note, Appium has the least consistent performance and most difficult setup.**
+    
     iOS and Adroid - Requires Appium and WebDriverAgent setup
 
     ### Setup Your Machine

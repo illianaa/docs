@@ -31,36 +31,18 @@ icon: 'code'
 
     ## XCode Cloud integration
     If you have XCode cloud set up, these tests will run as part of your Xcode cloud actions. Apple offers iOS developers 25 hours of free device farm access per month. Read more about this on [Xcode’s documentation](https://developer.apple.com/xcode-cloud/#:~:text=Apple%20Developer%20Program%20membership%20includes,Cloud%20monthly%20subscriptions%20are%20available.&text=Upgrade%20or%20downgrade%20your%20subscription%20at%20any%20time.).
-
   </Tab>
-  <Tab title="Android">
-    ## Swift package
-    You can use qaml from XCUITest to automate tasks in natural language. Initialize the qaml client with your API key and then start executing commands:
-
-    ```swift
-    import qaml
-
-    // Set the bundle ID of the app you'd like to test
-    let app = XCUIApplication(bundleIdentifier: "com.toyopagroup.picaboo")
-    app.launch()
-
-    let q = QamlClient(apiKey: "<API_KEY>", app: "<APP_INSTANCE>")
-
-    try await q.execute("tap the address bar")
-    try await q.execute("type camelqa.com")
-    ```
-
-    ## Updating the package
-    Please be sure to update your package. To update, open XCode > File > Packages > Update to Latest Package Version.
-    <Frame>
-      <img width="400" src="/images/XCUITest-update.png" />
-    </Frame>
 
 
-    ## XCode Cloud integration
-    If you have XCode cloud set up, these tests will run as part of your Xcode cloud actions. Apple offers iOS developers 25 hours of free device farm access per month. Read more about this on [Xcode’s documentation](https://developer.apple.com/xcode-cloud/#:~:text=Apple%20Developer%20Program%20membership%20includes,Cloud%20monthly%20subscriptions%20are%20available.&text=Upgrade%20or%20downgrade%20your%20subscription%20at%20any%20time.).
 
-  </Tab>
+
+
+
+
+
+
+
+
   <Tab title="Appium">
 
     ## Python library
