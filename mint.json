@@ -19,6 +19,10 @@
     {
       "name": "Support",
       "url": "mailto:support@camelqa.com"
+    },
+    {
+      "name": "Website",
+      "url": "https://camelqa.com"
     }
   ],
   "topbarCtaButton": {
