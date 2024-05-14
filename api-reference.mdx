@@ -86,18 +86,27 @@ This is the main way you interact with qaml. Give a natural language command and
 
 <CodeGroup>
     ```swift iOS
-    try await q.execute("tap the address bar")
-    try await q.execute("type camelqa.com")
-    try await q.execute("tap go")
-    try await q.execute("scroll down")
-    try await q.execute("open the apple music app")
+    try await q.execute("swipe down")
+    try await q.execute("tap the search bar")
     ```
+
+
+
+    ```kotlin Kotlin DSL
+    q.execute("swipe up")
+    q.execute("tap the search bar")
+    
+    ```
+    ```java Groovy/Java
+    q.execute("swipe up");
+    q.execute("tap the search bar");
+    
+    ```
+
+
     ```python Appium
-    q.execute("tap the address bar")
-    q.execute("type camelqa.com")
-    q.execute("tap go")
-    q.execute("scroll down")
-    q.execute("open the apple music app")
+    q.execute("swipe up")
+    q.execute("swipe down")
     ```
 </CodeGroup>
     
@@ -113,6 +122,25 @@ This is how you tell qaml to verify something without taking any action.
     try await q.execute("tap go")
     try await q.assert_condition("loading screen is shown")
     ```
+
+
+
+    ```kotlin Kotlin DSL
+    q.execute("type camelqa.com")
+    q.assert_condition("camelqa.com is shown")
+    q.execute("tap go")
+    q.assert_condition("loading screen is shown")
+    
+    ```
+    ```java Groovy/Java
+    q.execute("type camelqa.com");
+    q.assert_condition("camelqa.com is shown");
+    q.execute("tap go");
+    q.assert_condition("loading screen is shown");
+    
+    ```
+
+
     ```python Appium
     q.execute("type camelqa.com")
     q.assert_condition("camelqa.com is shown")
@@ -123,13 +151,42 @@ This is how you tell qaml to verify something without taking any action.
 
 Nothing is returned. A `QAMLExecException` will be thrown if the condition is not met.
 
-## wait_until (Swift only)
+## wait_until
 An iteration of assert, this is how you tell qaml to wait until an event occurs (ex. screen has completed loading)
+
 
 <CodeGroup>
     ```swift iOS
+    try await q.waitUntil(
+        condition: <String>, 
+        timeout: <TimeInterval> // optional, default is 10 seconds
+    )
+
+    // example:
     try await q.waitUntil("Results page has completed loading")
     ```
+
+    ```kotlin Kotlin DSL
+    q.waitUntil(
+        condition: <String>, 
+        timeout: <TimeInterval> // optional, default is 10 seconds
+    )
+
+    // example:
+    q.waitUntil("Results page has completed loading")
+    
+    ```
+    ```java Groovy/Java
+    q.waitUntil(
+        condition: <String>, 
+        timeout: <TimeInterval> // optional, default is 10 seconds
+    );
+
+    // example:
+    q.waitUntil("Results page has completed loading");
+    
+    ```
+    
     ```python Appium
     # not supported in python at this time
     ```
@@ -139,12 +196,22 @@ An iteration of assert, this is how you tell qaml to wait until an event occurs 
 This appends information to the qaml system prompt. Use this to specify details about your app. 
 
 <CodeGroup>
-```swift iOS
-q.systemPrompt = "Never scroll down, even if the user asks for it."
-```
-```python Appium
-q.system_prompt = "Never scroll down, even if the user asks for it."
-```
+    ```swift iOS
+    q.systemPrompt = "Never scroll down, even if the user asks for it."
+    ```
+
+    ```kotlin Kotlin DSL
+    // in progress
+
+    ```
+    ```java Groovy/Java
+    // in progress
+
+    ```
+
+    ```python Appium
+    q.system_prompt = "Never scroll down, even if the user asks for it."
+    ```
 </CodeGroup>
 
 ## switch_to_app
@@ -156,6 +223,16 @@ This is how to switch between apps.
     ```swift iOS
     try await q.switchToApp(bundleId: "com.apple.mobilesafari")
     ```
+
+    ```kotlin Kotlin DSL
+    // in progress
+    
+    ```
+    ```java Groovy/Java
+    // in progress
+    
+    ```
+
     ```python Android
     # use bundleID or package
     q.switch_to_app("com.apple.mobilesafari")
@@ -169,6 +246,17 @@ This is how to open a specific URL.
     ```swift iOS
     try await q.openURL(url: "https://en.m.wikipedia.org/wiki/Artificial_intelligence")
     ```
+
+    NOT DONE#######################################!
+    ```kotlin Kotlin DSL
+    // in progress
+    
+    ```
+    ```java Groovy/Java
+    // in progress
+    
+    ```
+
     ```python Appium
     # not supported in python at this time
     ```
