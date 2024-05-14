@@ -8,7 +8,7 @@ icon: 'gear-code'
 To Initialize a python client for camelQA, you must pass in an API key and optional parameters. Note that parameters differ based on implementation.
 
 <Tabs>
-    <Tab title="Swift">
+    <Tab title="iOS">
         ```swift
         // Set the bundle ID of the app you'd like to test
         let app = XCUIApplication(bundleIdentifier: "com.toyopagroup.picaboo")
@@ -29,10 +29,27 @@ To Initialize a python client for camelQA, you must pass in an API key and optio
     </Tab>
 
 
+    <Tab title="Android">
+        <CodeGroup>
+        ```java Groovy/Java
+            @Test
+            public void newTest() {
+                Client q = new Client("<APIKey>");
+            }
+        ```
+        ```kotlin Kotlin DSL
+            @Test
+            fun newTest() {
+                val q = QamlClient(apiKey = "<APIKey>")
+            }
+        ```
+        </CodeGroup>
+
+        There are no additional fields for the Andoid client at this time.
+    </Tab>
 
 
-
-    <Tab title="Python">
+    <Tab title="Appium">
         ```python
         q = qaml.Client(
             api_key="<API_KEY>", 
@@ -68,14 +85,14 @@ To Initialize a python client for camelQA, you must pass in an API key and optio
 This is the main way you interact with qaml. Give a natural language command and it will execute the command. 
 
 <CodeGroup>
-    ```swift swift
+    ```swift iOS
     try await q.execute("tap the address bar")
     try await q.execute("type camelqa.com")
     try await q.execute("tap go")
     try await q.execute("scroll down")
     try await q.execute("open the apple music app")
     ```
-    ```python python
+    ```python Appium
     q.execute("tap the address bar")
     q.execute("type camelqa.com")
     q.execute("tap go")
@@ -90,13 +107,13 @@ Nothing is returned. A `QAMLExecException` will be thrown if it is unable to exe
 This is how you tell qaml to verify something without taking any action. 
 
 <CodeGroup>
-    ```python swift
+    ```swift iOS
     try await q.execute("type camelqa.com")
     try await q.assert_condition("camelqa.com is shown")
     try await q.execute("tap go")
     try await q.assert_condition("loading screen is shown")
     ```
-    ```python python
+    ```python Appium
     q.execute("type camelqa.com")
     q.assert_condition("camelqa.com is shown")
     q.execute("tap go")
@@ -110,10 +127,10 @@ Nothing is returned. A `QAMLExecException` will be thrown if the condition is no
 An iteration of assert, this is how you tell qaml to wait until an event occurs (ex. screen has completed loading)
 
 <CodeGroup>
-    ```swift swift
+    ```swift iOS
     try await q.waitUntil("Results page has completed loading")
     ```
-    ```python python
+    ```python Appium
     # not supported in python at this time
     ```
 </CodeGroup>
@@ -122,10 +139,10 @@ An iteration of assert, this is how you tell qaml to wait until an event occurs 
 This appends information to the qaml system prompt. Use this to specify details about your app. 
 
 <CodeGroup>
-```swift swift
+```swift iOS
 q.systemPrompt = "Never scroll down, even if the user asks for it."
 ```
-```python python
+```python Appium
 q.system_prompt = "Never scroll down, even if the user asks for it."
 ```
 </CodeGroup>
@@ -136,10 +153,10 @@ This is how to switch between apps.
 <Warning>Note: for iOS, you must swtich to an app using this function in order to interact with that app.</Warning>
 
 <CodeGroup>
-    ```swift swift
+    ```swift iOS
     try await q.switchToApp(bundleId: "com.apple.mobilesafari")
     ```
-    ```python python
+    ```python Android
     # use bundleID or package
     q.switch_to_app("com.apple.mobilesafari")
     ```
@@ -149,10 +166,10 @@ This is how to switch between apps.
 This is how to open a specific URL. 
 
 <CodeGroup>
-    ```swift swift
+    ```swift iOS
     try await q.openURL(url: "https://en.m.wikipedia.org/wiki/Artificial_intelligence")
     ```
-    ```python python
+    ```python Appium
     # not supported in python at this time
     ```
 </CodeGroup>
