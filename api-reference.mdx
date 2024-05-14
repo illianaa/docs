@@ -27,6 +27,11 @@ To Initialize a python client for camelQA, you must pass in an API key and optio
         #### useAccessibilityElements
         Tests executed in XCUITest can utilize accessibility labels. Setting this to true leverages accessibility and setting this to false disables the feature. 
     </Tab>
+
+
+
+
+
     <Tab title="Python">
         ```python
         q = qaml.Client(
@@ -127,6 +132,8 @@ q.system_prompt = "Never scroll down, even if the user asks for it."
 
 ## switch_to_app
 This is how to switch between apps.
+
+<Warning>Note: for iOS, you must swtich to an app using this function in order to interact with that app.</Warning>
 
 <CodeGroup>
     ```swift swift

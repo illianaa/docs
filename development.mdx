@@ -37,7 +37,86 @@ icon: 'code'
 
 
 
+  <Tab title="Android">
+    ## Andoid package
+    You can use qaml from Andoid to automate tasks in natural language. Initialize the qaml client with your API key and then start executing commands:
 
+    <CodeGroup>
+      ```java Groovy/Java
+        import androidx.test.ext.junit.runners.AndroidJUnit4;
+        import org.junit.Test;
+        import org.junit.runner.RunWith;
+        import com.camelqa.qaml.Client;
+
+        @RunWith(AndroidJUnit4.class)
+        public class ExampleInstrumentedTest {
+
+            @Test
+            public void testAppleSite() {
+                Client q = new Client("<APIKey>");
+                q.openURL("https://apple.com");
+                q.execute("tap buy button");
+                q.execute("scroll down");
+            }
+        }
+      ```
+      ```kotlin Kotlin DSL
+        import androidx.test.ext.junit.runners.AndroidJUnit4
+        import org.junit.Test
+        import org.junit.runner.RunWith
+        import com.camelqa.qaml.Client as QamlClient
+
+        @RunWith(AndroidJUnit4::class)
+        class ExampleInstrumentedTest {
+
+            @Test
+            fun testAppleSite() {
+                val q = QamlClient(apiKey = "<APIKey>")
+                q.openURL("https://apple.com")
+                q.execute("tap buy button")
+                q.execute("scroll down")
+            }
+        }
+      ```
+    </CodeGroup>
+
+    ## Updating the package
+    To update the package, you can either manually update the version by incrementing your gradel to the most recent package version:
+    <CodeGroup>
+      ```java Groovy/Java
+        dependencies {
+          androidTestImplementation 'com.camelqa:qaml:1.0.1'
+        }
+      ```
+
+      ```kotlin Kotlin DSL
+        dependencies {
+          androidTestImplementation("com.camelqa:qaml:1.0.1")
+        }
+      ```
+    </CodeGroup>  
+
+    Alternatively, you can set the package to auto update:
+    <CodeGroup>
+      ```java Groovy/Java
+        dependencies {
+          androidTestImplementation 'com.camelqa:qaml:+'
+          // or
+          androidTestImplementation 'com.camelqa:qaml:latest.release'
+        }
+      ```
+
+      ```kotlin Kotlin DSL
+        dependencies {
+          androidTestImplementation("com.camelqa:qaml:+")
+          // or
+          androidTestImplementation("com.camelqa:qaml:latest.release")
+        }
+      ```
+    </CodeGroup>  
+
+    
+  </Tab>
 
 
 

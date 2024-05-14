@@ -196,6 +196,47 @@ icon: 'timer'
           </CodeGroup>
 
       </Step>
+      <Step title="Enable QUERY_ALL_PACKAGES">
+        Add `<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>` to `AndriodManifest.xml` file. 
+        
+        This step is required to allow camelQA to switch between apps. **If you do not need to swtich between apps, you may skip this step.**
+
+        ```xml
+          <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools">
+              <uses-permission android:name="android.permission.INTERNET" />
+              <!-- add the line below -->
+              <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/> 
+          ...
+        ```
+        <Note>This will raise a warning related to the use of the QUERY_ALL_PACKAGES permission. Ignore the warning.</Note>
+
+
+        **Alternatively,** if you would like to switch between apps without allowing all apps, you can add a `<queries>` element within the `<manifest>` element of your `AndroidManifest.xml` file. 
+        
+        This element allows you to specify which packages your app needs to query.
+        ```xml
+        <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+        <queries>
+            <!-- Declare specific apps your app needs to query -->
+            <package android:name="com.example.specificapp" />
+            <intent>
+                <action android:name="android.intent.action.VIEW" />
+                <data android:scheme="https" />
+            </intent>
+        </queries>
+
+        <application
+            android:allowBackup="true"
+            android:dataExtractionRules="@xml/data_extraction_rules"
+            android:fullBackupContent="@xml/backup_rules">
+            <!-- Your application components -->
+        </application>
+      </manifest>
+      ```
+      </Step>
       <Step title="Import qaml from your Android Instrumented Tests">
         <CodeGroup>
           ```java Groovy/Java
@@ -210,11 +251,12 @@ icon: 'timer'
 
 
               @Test
-              public void testAppleSite() {
+              public void myFirstTest() {
                 Client q = new Client("<API_KEY>");
-                q.openURL("https://apple.com");
-                q.execute("tap shop button");
-                q.execute("tap the first product");
+                q.execute("tap the search bar at the bottom")
+                q.execute("type Youtube")
+                q.execute("tap Youtube app")
+                q.assertCondition("Youtube app is open")
               }
             }
           ```
@@ -229,11 +271,12 @@ icon: 'timer'
             @RunWith(AndroidJUnit4::class)
             class ExampleInstrumentedTest {
               @Test
-              fun testAppleSite() {
+              fun myFirstTest() {
                 val q = QamlClient(apiKey = "<API_KEY>")
-                q.openURL("https://apple.com")
-                q.execute("tap shop button")
-                q.execute("tap the first product")
+                q.execute("tap the search bar at the bottom")
+                q.execute("type Youtube")
+                q.execute("tap Youtube app")
+                q.assertCondition("Youtube app is open")
               }
             }
           ```
