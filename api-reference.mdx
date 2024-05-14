@@ -113,7 +113,7 @@ This is the main way you interact with qaml. Give a natural language command and
 Nothing is returned. A `QAMLExecException` will be thrown if it is unable to execute the command.
 
 ## assert_condition
-This is how you tell qaml to verify something without taking any action. 
+This is how you tell qaml to verify something without taking any action. `assert_condition` takes a screenshot of the current screen and runs it through GPT-4o against your prompt and returns a pass or fail.
 
 <CodeGroup>
     ```swift iOS
@@ -152,7 +152,9 @@ This is how you tell qaml to verify something without taking any action.
 Nothing is returned. A `QAMLExecException` will be thrown if the condition is not met.
 
 ## wait_until
-An iteration of assert, this is how you tell qaml to wait until an event occurs (ex. screen has completed loading)
+This calls `assert_condition` on a loop. This is how you tell qaml to wait until an event occurs (ex. screen has completed loading). 
+
+`wait_until` takes a screenshot of the current screen and runs it through GPT-4o against your prompt and returns a pass or fail until the condition is met or timeout occurs.
 
 
 <CodeGroup>
