@@ -215,7 +215,7 @@ This appends information to the qaml system prompt. Use this to specify details 
 </CodeGroup>
 
 ## switch_to_app
-This is how to switch between apps.
+This is how to switch between apps. For iOS, use the [bundleID](https://offcornerdev.com/bundleid.html). For Android, use the [package ID](https://support.google.com/admob/answer/9972781?hl=en#:~:text=You%20can%20find%20an%20app's,id%3Dcom.).
 
 <Warning>Note: for iOS, you must swtich to an app using this function in order to interact with that app.</Warning>
 
@@ -225,11 +225,11 @@ This is how to switch between apps.
     ```
 
     ```kotlin Kotlin DSL
-    // in progress
+    q.switchToApp(packageName = "com.google.android.youtube")
     
     ```
     ```java Groovy/Java
-    // in progress
+    q.switchToApp(packageName = "com.google.android.youtube");
     
     ```
 
@@ -239,7 +239,7 @@ This is how to switch between apps.
     ```
 </CodeGroup>
 
-## open_URL (Swift only)
+## open_URL 
 This is how to open a specific URL. 
 
 <CodeGroup>
@@ -247,13 +247,12 @@ This is how to open a specific URL.
     try await q.openURL(url: "https://en.m.wikipedia.org/wiki/Artificial_intelligence")
     ```
 
-    NOT DONE#######################################!
     ```kotlin Kotlin DSL
-    // in progress
+    q.openURL("https://google.com")
     
     ```
     ```java Groovy/Java
-    // in progress
+    q.openURL("https://google.com");
     
     ```
 
