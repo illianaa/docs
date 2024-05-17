@@ -111,7 +111,7 @@ icon: 'timer'
         Open an existing project or create a new project. We support both Kotlin DSL and Groovy.
       </Step>
       <Step title="Add camelQA repo">
-        Add the camelQA repository to your Gradle build settings.
+        Add the camelQA repository to your Gradle build settings, usually `settings.gradle.kts`.
         <CodeGroup>
           ```java Groovy/Java
             pluginManagement {
@@ -125,7 +125,7 @@ icon: 'timer'
                 }
                 mavenCentral()
                 gradlePluginPortal()
-                // Adding your custom Maven repository
+                // Paste in this section
                 maven {
                   url "https://cdn.camelqa.com/"
                 }
@@ -137,7 +137,7 @@ icon: 'timer'
               repositories {
                 google()
                 mavenCentral()
-                // Adding your custom Maven repository
+                // Paste in this section
                 maven {
                   url "https://cdn.camelqa.com/"
                 }
@@ -157,7 +157,7 @@ icon: 'timer'
                 }
                 mavenCentral()
                 gradlePluginPortal()
-                // Adding your custom Maven repository
+                // Paste in this section
                 maven {
                   url = uri("https://cdn.camelqa.com/")
                 }
@@ -169,7 +169,7 @@ icon: 'timer'
               repositories {
                 google()
                 mavenCentral()
-                // Adding your custom Maven repository
+                // Paste in this section
                 maven {
                   url = uri("https://cdn.camelqa.com/")
                 }
@@ -180,16 +180,22 @@ icon: 'timer'
 
       </Step>
         <Step title="Add camelQA dependency">
-        Add the camelQA library dependency to your Gradle build file.
+        Add the camelQA library dependency to the list of dependencies in your Gradle build file. The file is in Gradle Scripts > usually `build.gradle.kts (Module: app)`.
         <CodeGroup>
           ```java Groovy/Java
             dependencies {
+              // Add this to auto update your package
+              androidTestImplementation 'com.camelqa:qaml:latest.release' 
+              // Alternatively, you can specify one version
               androidTestImplementation 'com.camelqa:qaml:1.0.2'
             }
           ```
 
           ```kotlin Kotlin DSL
             dependencies {
+              // Add this to auto update your package
+              androidTestImplementation("com.camelqa:qaml:latest.release")
+              // Alternatively, you can specify one version
               androidTestImplementation("com.camelqa:qaml:1.0.2")
             }
           ```
@@ -209,10 +215,10 @@ icon: 'timer'
               <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/> 
           ...
         ```
-        <Note>This will raise a warning related to the use of the QUERY_ALL_PACKAGES permission. Ignore the warning.</Note>
+        <Note>**This will raise a warning related to the use of the QUERY_ALL_PACKAGES permission.** The permission allows your app to see the full list of installed applications on the device. The API uses this list locally so you may switch between apps. camelQA does not recieve or store this list. Ignore the warning.</Note>
 
 
-        **Alternatively,** if you would like to switch between apps without allowing all apps, you can add a `<queries>` element within the `<manifest>` element of your `AndroidManifest.xml` file. 
+        **Alternatively,** if you would like to switch between apps without surfacing the entire list of available apps on your device, you can add a `<queries>` element within the `<manifest>` element of your `AndroidManifest.xml` file. 
         
         This element allows you to specify which packages your app needs to query.
         ```xml
@@ -238,6 +244,9 @@ icon: 'timer'
       ```
       </Step>
       <Step title="Import qaml from your Android Instrumented Tests">
+        Locate the correct file. App > Kotlin+Java > com.your.package.name (androidTest)
+        
+        Import qaml and create your first test. Note, `myFirstTest` is intended to run on a simulated Pixel 3a starting from the homescreen with the search bar visible and Youtube app installed.
         <CodeGroup>
           ```java Groovy/Java
             import androidx.test.ext.junit.runners.AndroidJUnit4;
