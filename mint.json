@@ -52,13 +52,18 @@
       ]
     },
     {
-      "group": "Get Started",
+      "group": "Getting Started",
       "pages": [
         "quickstart",
         "development",
-        "api-reference", 
+        "api-reference"
+      ]
+    },
+    {
+      "group": "Writing Scripts",
+      "pages": [ 
         "prompt-guide",
-        "appium"
+        "examples"
       ]
     },
     {
@@ -71,7 +76,8 @@
       "group": "Trouble Shooting",
       "pages": [
         "trouble-shooting/known-issues",
-        "trouble-shooting/icon-list"
+        "trouble-shooting/icon-list",
+        "appium"
       ]
     }
   ],

@@ -1,0 +1,100 @@
+---
+title: 'Examples'
+description: 'Sample code using camelQA'
+icon: 'brackets-curly'
+---
+
+This page gives you example code snippets with videos of the tests running. 
+
+<Accordion title="Youtube Shorts - Scroll through comments">
+
+  This test was run on an Android simulator (Pixel 3a) with the Youtube app installed. 
+
+  **Pre-conditions**
+  - Youtube app must be installed on the device
+  - <Tooltip tip="To implement app switching, check out Step 4 of our Android Quickstart documentation">App switching</Tooltip> must be enabled for Android 
+
+  <Frame>
+    <iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/fySmBtW0YUo"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </Frame>
+
+  <CodeGroup>
+      ```swift iOS
+      @MainActor
+      func testYoutubeShort() async throws {
+          // Set the bundle ID of the app you'd like to test
+          let app = XCUIApplication(bundleIdentifier: "com.google.ios.youtube")
+          app.launch()
+          
+          let q = QamlClient(apiKey: "<api key>", app: app)
+          
+          try await q.switchToApp(packageName = "com.google.android.youtube")
+          try await q.assertCondition("Youtube app is open")
+          try await q.execute("tap the Shorts tab at the bottom of the screen")
+          try await q.execute("scroll down")
+          try await q.execute("press the comment button on the right")
+          try await q.assertCondition("A drawer of comments is open")
+          try await q.execute("scroll down")
+          try await q.execute("tap the close button")
+          try await q.assertCondition("Ensure that the comments drawer showing all comments is not open")
+      }
+
+
+      ```
+
+      ```kotlin Kotlin DSL
+      // in ExampleInstrumentedTest.kts
+      @RunWith(AndroidJUnit4::class)
+      class ExampleInstrumentedTest {
+        @Test
+        fun youtubeShortsTest() {
+          val q = QamlClient(apiKey = "\<API_KEY\>")
+          
+          q.switchToApp(packageName = "com.google.android.youtube")
+          q.assertCondition("Youtube app is open")
+          q.execute("tap the Shorts tab at the bottom of the screen")
+          q.execute("scroll down")
+          q.execute("press the comment button on the right")
+          q.assertCondition("A drawer of comments is open")
+          q.execute("scroll down")
+          q.execute("tap the close button")
+          q.assertCondition("Ensure that the comments drawer showing all comments is not open")
+        }
+      }
+      ```
+
+      ```java Groovy/Java
+      // in ExampleInstrumentedTest.kts
+      @RunWith(AndroidJUnit4.class)
+      class ExampleInstrumentedTest {
+
+        @Test
+        void youtubeShortsTest() {
+          QamlClient q = new QamlClient(apiKey: "<API_KEY>")
+          
+          q.switchToApp(packageName: "com.google.android.youtube")
+          q.assertCondition("Youtube app is open")
+          q.execute("tap the Shorts tab at the bottom of the screen")
+          q.execute("scroll down")
+          q.execute("press the comment button on the right")
+          q.assertCondition("A drawer of comments is open")
+          q.execute("scroll down")
+          q.execute("tap the close button")
+          q.assertCondition("Ensure that the comments drawer showing all comments is not open")
+        }
+      }
+      ```
+
+      ```python Appium
+      # to come
+      ```
+  </CodeGroup>
+</Accordion>

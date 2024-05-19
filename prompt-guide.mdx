@@ -8,7 +8,9 @@ qaml uses AI to turn your natural language into app automations. [qaml actions](
 
 Please use this guide as best practices when issuing commands to qaml.
 
-## Long Press
+## Controls
+
+### Long Press
 **Long press the \<button name\> button** 
 
 This is the command to tap and hold on a region. By default, this holds down for 3 seconds.
@@ -18,7 +20,7 @@ Example:
 q.execute("Long press the record button")
 ```
 
-## Tapping Images
+### Tapping Images
 **Images are not identified at this time** 
 
 Images are treated as a black box in vision mode. The model knows that there is an image and it knows the coordinates, but it does not know what the image is.
@@ -35,5 +37,3 @@ q.asssert("There is a carousel of images of coffee tables")
 # execute does not use vision on images. Use labels and positioning to interact with images.
 q.execute("Tap the image under the header Coffee Tables") 
 ```
-
-
