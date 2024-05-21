@@ -31,13 +31,13 @@ To Initialize a python client for camelQA, you must pass in an API key and optio
 
     <Tab title="Android">
         <CodeGroup>
-        ```java Groovy/Java
+        ```java Java
             @Test
             public void newTest() {
                 Client q = new Client("<APIKey>");
             }
         ```
-        ```kotlin Kotlin DSL
+        ```kotlin Kotlin
             @Test
             fun newTest() {
                 val q = QamlClient(apiKey = "<APIKey>")
@@ -92,12 +92,12 @@ This is the main way you interact with qaml. Give a natural language command and
 
 
 
-    ```kotlin Kotlin DSL
+    ```kotlin Kotlin
     q.execute("swipe up")
     q.execute("tap the search bar")
     
     ```
-    ```java Groovy/Java
+    ```java Java
     q.execute("swipe up");
     q.execute("tap the search bar");
     
@@ -125,14 +125,14 @@ This is how you tell qaml to verify something without taking any action. `assert
 
 
 
-    ```kotlin Kotlin DSL
+    ```kotlin Kotlin
     q.execute("type camelqa.com")
     q.assert_condition("camelqa.com is shown")
     q.execute("tap go")
     q.assert_condition("loading screen is shown")
     
     ```
-    ```java Groovy/Java
+    ```java Java
     q.execute("type camelqa.com");
     q.assert_condition("camelqa.com is shown");
     q.execute("tap go");
@@ -168,7 +168,7 @@ This calls `assert_condition` on a loop. This is how you tell qaml to wait until
     try await q.waitUntil("Results page has completed loading")
     ```
 
-    ```kotlin Kotlin DSL
+    ```kotlin Kotlin
     q.waitUntil(
         condition: <String>, 
         timeout: <TimeInterval> // optional, default is 10 seconds
@@ -178,7 +178,7 @@ This calls `assert_condition` on a loop. This is how you tell qaml to wait until
     q.waitUntil("Results page has completed loading")
     
     ```
-    ```java Groovy/Java
+    ```java Java
     q.waitUntil(
         condition: <String>, 
         timeout: <TimeInterval> // optional, default is 10 seconds
@@ -202,11 +202,11 @@ This appends information to the qaml system prompt. Use this to specify details 
     q.systemPrompt = "Never scroll down, even if the user asks for it."
     ```
 
-    ```kotlin Kotlin DSL
+    ```kotlin Kotlin
     q.systemPrompt = "reverse the direction of all scrolls"
 
     ```
-    ```java Groovy/Java
+    ```java Java
     q.setSystemPrompt("reverse the direction of all scrolls");
 
     ```
@@ -226,11 +226,11 @@ This is how to switch between apps. For iOS, use the [bundleID](https://offcorne
     try await q.switchToApp(bundleId: "com.apple.mobilesafari")
     ```
 
-    ```kotlin Kotlin DSL
+    ```kotlin Kotlin
     q.switchToApp(packageName = "com.google.android.youtube")
     
     ```
-    ```java Groovy/Java
+    ```java Java
     q.switchToApp(packageName = "com.google.android.youtube");
     
     ```
@@ -249,11 +249,11 @@ This is how to open a specific URL.
     try await q.openURL(url: "https://en.m.wikipedia.org/wiki/Artificial_intelligence")
     ```
 
-    ```kotlin Kotlin DSL
+    ```kotlin Kotlin
     q.openURL("https://google.com")
     
     ```
-    ```java Groovy/Java
+    ```java Java
     q.openURL("https://google.com");
     
     ```

@@ -36,7 +36,6 @@ This page gives you example code snippets with videos of the tests running.
           
           let q = QamlClient(apiKey: "<api key>", app: app)
           
-          try await q.switchToApp(packageName = "com.google.android.youtube")
           try await q.assertCondition("Youtube app is open")
           try await q.execute("tap the Shorts tab at the bottom of the screen")
           try await q.execute("scroll down")
@@ -50,13 +49,13 @@ This page gives you example code snippets with videos of the tests running.
 
       ```
 
-      ```kotlin Kotlin DSL
+      ```kotlin Kotlin
       // in ExampleInstrumentedTest.kts
       @RunWith(AndroidJUnit4::class)
       class ExampleInstrumentedTest {
         @Test
         fun youtubeShortsTest() {
-          val q = QamlClient(apiKey = "\<API_KEY\>")
+          val q = QamlClient(apiKey = "<API_KEY>")
           
           q.switchToApp(packageName = "com.google.android.youtube")
           q.assertCondition("Youtube app is open")
@@ -71,7 +70,7 @@ This page gives you example code snippets with videos of the tests running.
       }
       ```
 
-      ```java Groovy/Java
+      ```java Java
       // in ExampleInstrumentedTest.kts
       @RunWith(AndroidJUnit4.class)
       class ExampleInstrumentedTest {
@@ -95,6 +94,57 @@ This page gives you example code snippets with videos of the tests running.
 
       ```python Appium
       # to come
+      ```
+  </CodeGroup>
+</Accordion>
+<Accordion title="Snapchat - Granting camera roll permissions">
+
+  This test was run on a phyiscal iOS device with the Snapchat app installed. 
+
+  **Pre-conditions**
+  - Snapchat app must be installed on the device
+  - <Tooltip tip="To implement app switching, check out Step 4 of our Android Quickstart documentation">App switching</Tooltip> must be enabled for Android 
+
+  <Frame>
+    <iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/DhrcVyAX0XA"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </Frame>
+
+  <CodeGroup>
+      ```swift iOS
+      @MainActor
+      func testYoutubeShort() async throws {
+        // Set the bundle ID of the app you'd like to test
+        let app = XCUIApplication(bundleIdentifier: "com.toyopagroup.picaboo")
+        app.launch()
+        
+        let q = QamlClient(apiKey: "<api key>", app: app)
+        
+        try await q.execute("tap the memories button")
+        try await q.execute("tap Camera Roll at the top")
+        try await q.execute("Tap the Enable button")
+        try await q.waitUntil("Settings for Snapchat are visible")
+        try await q.switchToApp(bundleId: "com.apple.Preferences")
+        try await q.assertCondition("User is in the Settings page for Snapchat")
+        try await q.execute("Tap Photos None button")
+        try await q.execute("tap Full Access")
+        try await q.assertCondition("Modal appears asking for full access to photo library")
+        try await q.execute("tap Allow Full Access button")
+        try await q.assertCondition("There is no modal on screen")
+        try await q.switchToApp(bundleId: "com.toyopagroup.picaboo")
+        try await q.execute("tap the memories button")
+        try await q.execute("tap Camera Roll at the top")
+        try await q.assertCondition("A camera roll of photos are showing")
+      }
+
+
       ```
   </CodeGroup>
 </Accordion>

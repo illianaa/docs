@@ -63,6 +63,7 @@ icon: 'timer'
         Include `import qaml` at the top of your test file
       </Step>
       <Step title="Create a new test function">
+      Note, this test case will only work if you have Apple News on your device and have opened it at least once before.
       Example test:
         ```swift
         @MainActor
@@ -74,7 +75,7 @@ icon: 'timer'
             let q = QamlClient(apiKey: "<api key>", app: app)
             
             try await q.execute("click the sports tab")
-            try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
+            try await q.waitUntil("the sports tab has loaded")
             try await q.execute("scroll down")
             try await q.execute("tap the first article")
             try await q.assertCondition("The screen shows a Get Started button")
@@ -258,7 +259,7 @@ icon: 'timer'
         
         Import qaml and create your first test. Note, `myFirstTest` is intended to run on a simulated Pixel 3a starting from the homescreen with the search bar visible and Youtube app installed.
         <CodeGroup>
-          ```java Groovy/Java
+          ```java Java
             import androidx.test.ext.junit.runners.AndroidJUnit4;
 
             import org.junit.Test;
@@ -282,7 +283,7 @@ icon: 'timer'
               }
             }
           ```
-          ```kotlin Kotlin DSL
+          ```kotlin Kotlin
             import androidx.test.ext.junit.runners.AndroidJUnit4
 
             import org.junit.Test

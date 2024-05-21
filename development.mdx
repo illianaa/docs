@@ -42,7 +42,7 @@ icon: 'code'
     You can use qaml from Andoid to automate tasks in natural language. Initialize the qaml client with your API key and then start executing commands:
 
     <CodeGroup>
-      ```java Groovy/Java
+      ```java Java
         import androidx.test.ext.junit.runners.AndroidJUnit4;
         import org.junit.Test;
         import org.junit.runner.RunWith;
@@ -60,7 +60,7 @@ icon: 'code'
             }
         }
       ```
-      ```kotlin Kotlin DSL
+      ```kotlin Kotlin
         import androidx.test.ext.junit.runners.AndroidJUnit4
         import org.junit.Test
         import org.junit.runner.RunWith
@@ -85,13 +85,13 @@ icon: 'code'
     
     To update the package, you can either manually update the version by incrementing your gradel to the most recent package version:
     <CodeGroup>
-      ```java Groovy/Java
+      ```java Java
         dependencies {
           androidTestImplementation 'com.camelqa:qaml:1.0.2'
         }
       ```
 
-      ```kotlin Kotlin DSL
+      ```kotlin Kotlin
         dependencies {
           androidTestImplementation("com.camelqa:qaml:1.0.2")
         }
@@ -100,7 +100,7 @@ icon: 'code'
 
     Alternatively, you can set the package to auto update:
     <CodeGroup>
-      ```java Groovy/Java
+      ```java Java
         dependencies {
           androidTestImplementation 'com.camelqa:qaml:+'
           // or
@@ -108,7 +108,7 @@ icon: 'code'
         }
       ```
 
-      ```kotlin Kotlin DSL
+      ```kotlin Kotlin
         dependencies {
           androidTestImplementation("com.camelqa:qaml:+")
           // or
