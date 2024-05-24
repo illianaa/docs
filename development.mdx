@@ -13,13 +13,13 @@ icon: 'code'
     import qaml
 
     // Set the bundle ID of the app you'd like to test
-    let app = XCUIApplication(bundleIdentifier: "com.toyopagroup.picaboo")
+    let app = XCUIApplication(bundleIdentifier: "com.yourbundleID")
     app.launch()
 
     let q = QamlClient(apiKey: "<API_KEY>", app: "<APP_INSTANCE>")
 
-    try await q.execute("tap the address bar")
-    try await q.execute("type camelqa.com")
+    q.execute("tap the address bar")
+    q.execute("type camelqa.com")
     ```
 
     ## Updating the package

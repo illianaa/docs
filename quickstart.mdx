@@ -66,19 +66,18 @@ icon: 'timer'
       Note, this test case will only work if you have Apple News on your device and have opened it at least once before.
       Example test:
         ```swift
-        @MainActor
-        func testAppleNews() async throws {
+        func testAppleNews() throws {
             // Set the bundle ID of the app you'd like to test
             let app = XCUIApplication(bundleIdentifier: "com.apple.news")
             app.launch()
             
             let q = QamlClient(apiKey: "<api key>", app: app)
             
-            try await q.execute("click the sports tab")
-            try await q.waitUntil("the sports tab has loaded")
-            try await q.execute("scroll down")
-            try await q.execute("tap the first article")
-            try await q.assertCondition("The screen shows a Get Started button")
+            q.execute("click the sports tab")
+            q.waitUntil("the sports tab has loaded")
+            q.execute("scroll down")
+            q.execute("tap the first article")
+            q.assertCondition("The screen shows a Get Started button")
         }
     ```
       </Step>

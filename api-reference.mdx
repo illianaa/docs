@@ -86,8 +86,8 @@ This is the main way you interact with qaml. Give a natural language command and
 
 <CodeGroup>
     ```swift iOS
-    try await q.execute("swipe down")
-    try await q.execute("tap the search bar")
+    q.execute("swipe down")
+    q.execute("tap the search bar")
     ```
 
 
@@ -117,10 +117,10 @@ This is how you tell qaml to verify something without taking any action. `assert
 
 <CodeGroup>
     ```swift iOS
-    try await q.execute("type camelqa.com")
-    try await q.assert_condition("camelqa.com is shown")
-    try await q.execute("tap go")
-    try await q.assert_condition("loading screen is shown")
+    q.execute("type camelqa.com")
+    q.assert_condition("camelqa.com is shown")
+    q.execute("tap go")
+    q.assert_condition("loading screen is shown")
     ```
 
 
@@ -159,13 +159,13 @@ This calls `assert_condition` on a loop. This is how you tell qaml to wait until
 
 <CodeGroup>
     ```swift iOS
-    try await q.waitUntil(
+    q.waitUntil(
         condition: <String>, 
         timeout: <TimeInterval> // optional, default is 10 seconds
     )
 
     // example:
-    try await q.waitUntil("Results page has completed loading")
+    q.waitUntil("Results page has completed loading")
     ```
 
     ```kotlin Kotlin
@@ -223,7 +223,7 @@ This is how to switch between apps. For iOS, use the [bundleID](https://offcorne
 
 <CodeGroup>
     ```swift iOS
-    try await q.switchToApp(bundleId: "com.apple.mobilesafari")
+    q.switchToApp(bundleId: "com.apple.mobilesafari")
     ```
 
     ```kotlin Kotlin
@@ -246,7 +246,7 @@ This is how to open a specific URL.
 
 <CodeGroup>
     ```swift iOS
-    try await q.openURL(url: "https://en.m.wikipedia.org/wiki/Artificial_intelligence")
+    q.openURL(url: "https://en.m.wikipedia.org/wiki/Artificial_intelligence")
     ```
 
     ```kotlin Kotlin

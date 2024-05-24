@@ -28,22 +28,21 @@ This page gives you example code snippets with videos of the tests running.
 
   <CodeGroup>
       ```swift iOS
-      @MainActor
-      func testYoutubeShort() async throws {
+      func testYoutubeShort() throws {
           // Set the bundle ID of the app you'd like to test
           let app = XCUIApplication(bundleIdentifier: "com.google.ios.youtube")
           app.launch()
           
           let q = QamlClient(apiKey: "<api key>", app: app)
           
-          try await q.assertCondition("Youtube app is open")
-          try await q.execute("tap the Shorts tab at the bottom of the screen")
-          try await q.execute("scroll down")
-          try await q.execute("press the comment button on the right")
-          try await q.assertCondition("A drawer of comments is open")
-          try await q.execute("scroll down")
-          try await q.execute("tap the close button")
-          try await q.assertCondition("Ensure that the comments drawer showing all comments is not open")
+          q.assertCondition("Youtube app is open")
+          q.execute("tap the Shorts tab at the bottom of the screen")
+          q.execute("scroll down")
+          q.execute("press the comment button on the right")
+          q.assertCondition("A drawer of comments is open")
+          q.execute("scroll down")
+          q.execute("tap the close button")
+          q.assertCondition("Ensure that the comments drawer showing all comments is not open")
       }
 
 
@@ -119,29 +118,28 @@ This page gives you example code snippets with videos of the tests running.
 
   <CodeGroup>
       ```swift iOS
-      @MainActor
-      func testYoutubeShort() async throws {
+      func testSharePhotosWithSnap() throws {
         // Set the bundle ID of the app you'd like to test
         let app = XCUIApplication(bundleIdentifier: "com.toyopagroup.picaboo")
         app.launch()
         
         let q = QamlClient(apiKey: "<api key>", app: app)
         
-        try await q.execute("tap the memories button")
-        try await q.execute("tap Camera Roll at the top")
-        try await q.execute("Tap the Enable button")
-        try await q.waitUntil("Settings for Snapchat are visible")
-        try await q.switchToApp(bundleId: "com.apple.Preferences")
-        try await q.assertCondition("User is in the Settings page for Snapchat")
-        try await q.execute("Tap Photos None button")
-        try await q.execute("tap Full Access")
-        try await q.assertCondition("Modal appears asking for full access to photo library")
-        try await q.execute("tap Allow Full Access button")
-        try await q.assertCondition("There is no modal on screen")
-        try await q.switchToApp(bundleId: "com.toyopagroup.picaboo")
-        try await q.execute("tap the memories button")
-        try await q.execute("tap Camera Roll at the top")
-        try await q.assertCondition("A camera roll of photos are showing")
+        q.execute("tap the memories button")
+        q.execute("tap Camera Roll at the top")
+        q.execute("Tap the Enable button")
+        q.waitUntil("Settings for Snapchat are visible")
+        q.switchToApp(bundleId: "com.apple.Preferences")
+        q.assertCondition("User is in the Settings page for Snapchat")
+        q.execute("Tap Photos None button")
+        q.execute("tap Full Access")
+        q.assertCondition("Modal appears asking for full access to photo library")
+        q.execute("tap Allow Full Access button")
+        q.assertCondition("There is no modal on screen")
+        q.switchToApp(bundleId: "com.toyopagroup.picaboo")
+        q.execute("tap the memories button")
+        q.execute("tap Camera Roll at the top")
+        q.assertCondition("A camera roll of photos are showing")
       }
 
 
