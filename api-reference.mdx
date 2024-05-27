@@ -198,20 +198,22 @@ This appends information to the qaml system prompt. Use this to specify details 
 
 <CodeGroup>
     ```swift iOS
-    q.systemPrompt = "Never scroll down, even if the user asks for it."
+    // qaml can't tell what a liked image looks like on Instagram. This system prompt solves the issue
+    q.systemPrompt = "An image is like if the heart icon is solid is red. An image is not liked if the heart icon is a white outline and not filled."
     ```
 
     ```kotlin Kotlin
-    q.systemPrompt = "reverse the direction of all scrolls"
-
+    // qaml can't tell what a liked image looks like on Instagram. This system prompt solves the issue
+    q.systemPrompt = "An image is like if the heart icon is solid is red. An image is not liked if the heart icon is a white outline and not filled."
     ```
     ```java Java
-    q.setSystemPrompt("reverse the direction of all scrolls");
-
+    // qaml can't tell what a liked image looks like on Instagram. This system prompt solves the issue
+    q.setSystemPrompt("An image is like if the heart icon is solid is red. An image is not liked if the heart icon is a white outline and not filled.");
     ```
 
     ```python Appium
-    q.system_prompt = "Never scroll down, even if the user asks for it."
+    # qaml can't tell what a liked image looks like on Instagram. This system prompt solves the issue
+    q.system_prompt = "An image is like if the heart icon is solid is red. An image is not liked if the heart icon is a white outline and not filled."
     ```
 </CodeGroup>
 
@@ -241,7 +243,6 @@ Note, this is purely additive. This does not guarantee that the delay between ea
 
     // example:
     q.autoDelay(20);
-
     ```
 
     ```python Appium

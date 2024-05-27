@@ -4,7 +4,7 @@ description: 'How to prompt qaml'
 icon: 'terminal'
 ---
 
-## assertCondition() and waitUntil()
+## Using assertCondition() and waitUntil()
 **How it works:**
 Assert works by taking a screenshot of the current screen and sending the screenshot to a vision model, along with your condition. The model evaluates the screenshot against the condition and returns a pass or fail. Wait until uses the assert condition on a loop until the timeout limit is hit.
 
@@ -40,19 +40,30 @@ Here is a non-exhaustive list of things you should **avoid doing** in your asser
 **tl;dr**
 assertCondition and waitUntil are very powerful, but require a condition that is obviously evaluated.
 
+## Exact text match
+If you would like camelQA to provide an exact string match, specify the text in single quotes.
+
+Here is an example:
+``` swift
+q.assertCondition("the screenshot shows the header 'Welcome!'")
+```
+
 ## Tapping Images
 **Images are not identified at this time** 
 
-In vision mode, images are treated as black boxes. The model recognizes the presence and coordinates of an image but does not identify its content.
+Images are treated as black boxes for every command aside from assertCondition and waitUntil. The model recognizes the presence and coordinates of an image but does not identify its content.
 
-Aside from the waitUntil and assertCondition commands, Qaml cannot interact with images within an app unless you are using accessibility mode. Accessibility mode leverages device-level labels, which may include image descriptions.
+camelQA cannot tap an image based off of it's description unless you are using accessibility mode and there is a device-level label that includes an image description.
 
-We recommend using placement cues to interact with specific images. Note: Icon buttons are not considered images and can be interacted with directly.
+We recommend using placement cues to interact with specific images. 
 Example:
-```python
-# assert uses a vision model to see and evaluate the screen
-q.assert("There is a carousel of images of coffee tables") 
+```swift
+// assert uses a vision model to see and evaluate the screen, so this will work
+q.assertCondition("There is an image of a coffee table") 
 
-# execute does not use vision on images. Use labels and positioning to interact with images.
+// execute does not use vision on images. 
+q.execute("Tap the image of the coffee table") // this will most likely fail
+
+// Instead, use labels and positioning to interact with images.
 q.execute("Tap the image under the header Coffee Tables") 
 ```
