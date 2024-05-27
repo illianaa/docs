@@ -6,7 +6,7 @@ icon: 'terminal'
 
 qaml uses AI to turn your natural language into app automations. [qaml actions](https://docs.camelqa.com/api-reference) are used for device level control. However, there are additional controls you can specify in the prompt.
 
-Please use this guide as best practices when issuing commands to qaml.
+Please use this guide as a best practice when issuing commands to qaml.
 
 ## Controls
 
@@ -23,17 +23,47 @@ q.execute("Long press the record button")
 ### Tapping Images
 **Images are not identified at this time** 
 
-Images are treated as a black box in vision mode. The model knows that there is an image and it knows the coordinates, but it does not know what the image is.
+In vision mode, images are treated as black boxes. The model recognizes the presence and coordinates of an image but does not identify its content.
 
-Aside from the wait_until and assert commands, qaml cannot see images within an app. Note, this is not true if you are using accessibility mode. Accessibility mode uses device level labels which may include image descriptions.
+Aside from the waitUntil and assertCondition commands, Qaml cannot interact with images within an app unless you are using accessibility mode. Accessibility mode leverages device-level labels, which may include image descriptions.
 
-We recommend you use placement queues to interact with specific images. **Note,** icon buttons are *not* images and can be interacted with directly.
-
+We recommend using placement cues to interact with specific images. Note: Icon buttons are not considered images and can be interacted with directly.
 Example:
 ```python
 # assert uses a vision model to see and evaluate the screen
-q.asssert("There is a carousel of images of coffee tables") 
+q.assert("There is a carousel of images of coffee tables") 
 
 # execute does not use vision on images. Use labels and positioning to interact with images.
 q.execute("Tap the image under the header Coffee Tables") 
+```
+
+
+## Best practices
+
+### Tips for assertCondition() and waitUntil()
+**How it works:**
+Assert works by taking a screenshot of the current screen and sending the screenshot to a vision model, along with your condition. The model evaluates the screenshot against the condition and returns a pass or fail. Wait until uses the assert condition on a loop until the timeout limit is hit.
+
+When writing your assert, you must find a balance between a description specific enough to fail if something is wrong, but also concrete and obvious. If your assert is not easily evaluated, or could be misinterpreted, you will get inconsistent results. 
+
+Here is an example:
+``` swift
+q.openURL(url: "https://ycombinator.com")
+q.assertCondition("the screenshot shows the homepage for ycombinator.com")
+```
+<Accordion title="Screenshot of the screen being evaluated.">
+    <Frame>
+    <img width="228" src="/images/YCombinator.png" />
+    </Frame>
+</Accordion>
+This *should* work. However, it fails occasionally with this error:
+```
+failed - QAMLException(reason: "Assertion failed: the screenshot shows the homepage for ycombinator.com. 
+Reason: Optional(The screenshot shows a mobile view of a webpage related to Y Combinator, but it does not confirm that this is the homepage of ycombinator.com. 
+The URL \'ycombinator.com\' is visible, but it does not specify that this is the homepage.)")
+```
+To fix this, we need to remove the ambiguity from the prompt. Using the term **web page** rather than **homepage** solves the problem. The model is no longer uncertain whether or not the current page is classified as the homepage. With a subtle shift in our language, we get a reliable test case:
+``` swift
+q.openURL(url: "https://ycombinator.com")
+q.assertCondition("the screenshot shows the web page for ycombinator.com")
 ```
