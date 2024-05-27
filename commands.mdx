@@ -12,6 +12,14 @@ Certain commands can be issued in the prompt.
 This is the command to tap and hold on a region. By default, this holds down for 3 seconds.
 
 Example:
-```python
+```swift
 q.execute("Long press the record button")
+```
+
+## Exact text match
+If you would like camelQA to provide an exact string match, specify the text in single quotes.
+
+Here is an example:
+```swift
+q.assertCondition("the screenshot shows the header 'Welcome!'")
 ```

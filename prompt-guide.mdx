@@ -4,6 +4,53 @@ description: 'How to prompt qaml'
 icon: 'terminal'
 ---
 
+Please read this guide on how to use camelQA. 
+
+## The ultimate tip to using camelQA
+**Use accessibility labels.**
+
+This does not mean you need to add unique element identifiers to your code (doing that will not impact camelQA at all). However, camelQA can see accessibility labels that appear to the screen reader. 
+
+Follow these guides to easily enable the screen reader so you can be more precise with your test cases.
+<Accordion title="Enable VoiceOver on your iOS device.">
+    <Steps>
+        <Step title="Turn on the VoiceOver shortcut">
+            This will allow you to easily toggle VoiceOver on and off by triple tapping the home or side button.
+
+            To turn on the VoiceOver shortcut, go to Settings > Accessibility > Accessibility Shortcut. Then locate and tap VoiceOver.
+        </Step>
+        <Step title="Toggle on VoiceOver mode">
+            Navigate to the app screen you would like to test. Triple tap the home or side button to enable VoiceOver.
+        </Step>
+        <Step title="Identify the screen reader label of the element you want to interact with">
+            Tap the element you would like to interact with. Whatever VoiceOver reads aloud is what camelQA will see. Use this label in your execute command.
+        </Step>
+    </Steps>
+</Accordion>
+<Accordion title="Enable TalkBack on your Android device.">
+    <Steps>
+        <Step title="Turn on the TalkBack shortcut">
+            This will allow you to easily toggle TalkBack on and off by holding the volume up and volume down buttons for a few seconds.
+
+            To turn on the TalkBack shortcut, go to Settings > Accessibility > TalkBack. Then toggle on the TalkBack shortcut.
+        </Step>
+        <Step title="Toggle on TalkBack mode">
+            Navigate to the app screen you would like to test. Hold the volume up and volume down buttons for a few seconds to enable TalkBack.
+        </Step>
+        <Step title="Identify the screen reader label of the element you want to interact with">
+            Tap the element you would like to interact with. Whatever TalkBack reads aloud is what camelQA will see. Use this label in your execute command.
+        </Step>
+    </Steps>
+</Accordion>
+<Accordion title="Example of accessibility labels on Youtube Shorts.">
+    This button is labeled **back button** for iOS but **navigate up button** for Android.
+    <Frame>
+        <img width="228" src="/images/youtube-bad-label.png" />
+    </Frame>
+    Using the screen reader allows us to understand what qaml sees the icons labeled as. 
+</Accordion>
+
+
 ## Using assertCondition() and waitUntil()
 **How it works:**
 Assert works by taking a screenshot of the current screen and sending the screenshot to a vision model, along with your condition. The model evaluates the screenshot against the condition and returns a pass or fail. Wait until uses the assert condition on a loop until the timeout limit is hit.
@@ -34,19 +81,11 @@ q.assertCondition("the screenshot shows the web page for ycombinator.com")
 
 Here is a non-exhaustive list of things you should **avoid doing** in your asserts and waits:
 - listing out your app, ex. `q.assertCondition("I am in Youtube Shorts")`
-- inpercise description of color, ex. `q.assertCondition("there is a blue send button")` but the button is white with blue lettering. If you are going to use color in your assert, ensure your description is percise.
+- imprecise description of color, ex. `q.assertCondition("there is a blue send button")` but the button is white with blue lettering. If you are going to use color in your assert, ensure your description is precise.
 - relying on descriptions that require experience with your app, ex. `q.assertCondition("I am in the community playlist page")` but there is no identifying text that says 'community playlist'
 
 **tl;dr**
 assertCondition and waitUntil are very powerful, but require a condition that is obviously evaluated.
-
-## Exact text match
-If you would like camelQA to provide an exact string match, specify the text in single quotes.
-
-Here is an example:
-``` swift
-q.assertCondition("the screenshot shows the header 'Welcome!'")
-```
 
 ## Tapping Images
 **Images are not identified at this time** 
