@@ -174,7 +174,7 @@ This calls `assert_condition` on a loop. This is how you tell qaml to wait until
     )
 
     // example:
-    q.waitUntil("Results page has completed loading", timeout: 20)
+    q.waitUntil("Results page has completed loading", timeout: 20.0)
     
     ```
     ```java Java
@@ -184,7 +184,7 @@ This calls `assert_condition` on a loop. This is how you tell qaml to wait until
     );
 
     // example:
-    q.waitUntil("Results page has completed loading", timeout: 20);
+    q.waitUntil("Results page has completed loading", timeout: 20.0);
     
     ```
     
@@ -258,7 +258,6 @@ This is how to switch between apps. For iOS, use the [bundleID](https://offcorne
     ```swift iOS
     q.switchToApp(bundleId: "com.apple.mobilesafari")
     ```
-
     ```kotlin Kotlin
     q.switchToApp(packageName = "com.google.android.youtube")
     
@@ -267,10 +266,32 @@ This is how to switch between apps. For iOS, use the [bundleID](https://offcorne
     q.switchToApp(packageName = "com.google.android.youtube");
     
     ```
-
     ```python Appium
     # use bundleID or package
     q.switch_to_app("com.apple.mobilesafari")
+    ```
+</CodeGroup>
+
+## launchApp
+This is how to hard launch apps. This will kill the app and restart it. For iOS, use the [bundleID](https://offcornerdev.com/bundleid.html). For Android, use the [package ID](https://support.google.com/admob/answer/9972781?hl=en#:~:text=You%20can%20find%20an%20app's,id%3Dcom.).
+
+
+
+<CodeGroup>
+    ```swift iOS
+    q.launchApp(bundleId: "com.apple.mobilesafari")
+    ```
+
+    ```kotlin Kotlin
+    q.launchApp(packageName = "com.google.android.youtube")
+    
+    ```
+    ```java Java
+    q.launchApp(packageName = "com.google.android.youtube");
+    
+    ```
+    ```python Appium
+    # not supported at this time
     ```
 </CodeGroup>
 

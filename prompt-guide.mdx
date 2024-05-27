@@ -4,23 +4,43 @@ description: 'How to prompt qaml'
 icon: 'terminal'
 ---
 
-qaml uses AI to turn your natural language into app automations. [qaml actions](https://docs.camelqa.com/api-reference) are used for device level control. However, there are additional controls you can specify in the prompt.
+## assertCondition() and waitUntil()
+**How it works:**
+Assert works by taking a screenshot of the current screen and sending the screenshot to a vision model, along with your condition. The model evaluates the screenshot against the condition and returns a pass or fail. Wait until uses the assert condition on a loop until the timeout limit is hit.
 
-Please use this guide as a best practice when issuing commands to qaml.
+When writing your assert, you must create a description specific enough to fail if something is wrong, but also concrete and obviously evaluated. If your assert is not easily evaluated, or could be misinterpreted, you will get inconsistent results. 
 
-## Controls
-
-### Long Press
-**Long press the \<button name\> button** 
-
-This is the command to tap and hold on a region. By default, this holds down for 3 seconds.
-
-Example:
-```python
-q.execute("Long press the record button")
+Here is an example:
+``` swift
+q.openURL(url: "https://ycombinator.com")
+q.assertCondition("the screenshot shows the homepage for ycombinator.com")
+```
+<Accordion title="Screenshot of the screen being evaluated.">
+    <Frame>
+    <img width="228" src="/images/YCombinator.png" />
+    </Frame>
+</Accordion>
+It feels like this *should* work. However, the use of the term *homepage* causes the test to fail occasionally with this error:
+```
+failed - QAMLException(reason: "Assertion failed: the screenshot shows the homepage for ycombinator.com. 
+Reason: Optional(The screenshot shows a mobile view of a webpage related to Y Combinator, but it does not confirm that this is the homepage of ycombinator.com. 
+The URL \'ycombinator.com\' is visible, but it does not specify that this is the homepage.)")
+```
+To fix this, we need to remove the ambiguity from the prompt. Using the term **web page** rather than **homepage** solves the problem. The model is no longer uncertain whether or not the current page is classified as the homepage. With a subtle shift in our language, we get a reliable test case:
+``` swift
+q.openURL(url: "https://ycombinator.com")
+q.assertCondition("the screenshot shows the web page for ycombinator.com")
 ```
 
-### Tapping Images
+Here is a non-exhaustive list of things you should **avoid doing** in your asserts and waits:
+- listing out your app, ex. `q.assertCondition("I am in Youtube Shorts")`
+- inpercise description of color, ex. `q.assertCondition("there is a blue send button")` but the button is white with blue lettering. If you are going to use color in your assert, ensure your description is percise.
+- relying on descriptions that require experience with your app, ex. `q.assertCondition("I am in the community playlist page")` but there is no identifying text that says 'community playlist'
+
+**tl;dr**
+assertCondition and waitUntil are very powerful, but require a condition that is obviously evaluated.
+
+## Tapping Images
 **Images are not identified at this time** 
 
 In vision mode, images are treated as black boxes. The model recognizes the presence and coordinates of an image but does not identify its content.
@@ -35,35 +55,4 @@ q.assert("There is a carousel of images of coffee tables")
 
 # execute does not use vision on images. Use labels and positioning to interact with images.
 q.execute("Tap the image under the header Coffee Tables") 
-```
-
-
-## Best practices
-
-### Tips for assertCondition() and waitUntil()
-**How it works:**
-Assert works by taking a screenshot of the current screen and sending the screenshot to a vision model, along with your condition. The model evaluates the screenshot against the condition and returns a pass or fail. Wait until uses the assert condition on a loop until the timeout limit is hit.
-
-When writing your assert, you must find a balance between a description specific enough to fail if something is wrong, but also concrete and obvious. If your assert is not easily evaluated, or could be misinterpreted, you will get inconsistent results. 
-
-Here is an example:
-``` swift
-q.openURL(url: "https://ycombinator.com")
-q.assertCondition("the screenshot shows the homepage for ycombinator.com")
-```
-<Accordion title="Screenshot of the screen being evaluated.">
-    <Frame>
-    <img width="228" src="/images/YCombinator.png" />
-    </Frame>
-</Accordion>
-This *should* work. However, it fails occasionally with this error:
-```
-failed - QAMLException(reason: "Assertion failed: the screenshot shows the homepage for ycombinator.com. 
-Reason: Optional(The screenshot shows a mobile view of a webpage related to Y Combinator, but it does not confirm that this is the homepage of ycombinator.com. 
-The URL \'ycombinator.com\' is visible, but it does not specify that this is the homepage.)")
-```
-To fix this, we need to remove the ambiguity from the prompt. Using the term **web page** rather than **homepage** solves the problem. The model is no longer uncertain whether or not the current page is classified as the homepage. With a subtle shift in our language, we get a reliable test case:
-``` swift
-q.openURL(url: "https://ycombinator.com")
-q.assertCondition("the screenshot shows the web page for ycombinator.com")
 ```

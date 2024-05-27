@@ -56,7 +56,8 @@
       "pages": [
         "quickstart",
         "development",
-        "api-reference"
+        "api-reference",
+        "commands"
       ]
     },
     {
