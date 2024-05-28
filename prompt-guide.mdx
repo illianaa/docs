@@ -51,6 +51,26 @@ Follow these guides to easily enable the screen reader so you can be more precis
 </Accordion>
 
 
+## Explain how to use your app
+
+Let's say you want camelQA to record a video. Don't do something like this:
+```swift
+q.execute("record a video")
+```
+This leaves a lot to be interpreted which means there will be inconsistent results. Instead, tell camelQA *how* to complete the action. 
+```swift
+q.execute("tap the record video button")
+q.waitUntil("the red timer at the top is greater than 10 seconds")
+q.execute("tap the stop recording video button")
+```
+<Accordion title="Screenshot being evaluated by waitUntil.">
+    <Frame>
+        <img width="228" src="/images/maisy.jpeg" />
+    </Frame>
+    The waitUntil will mark passed once the timer at the top is greater than 10 seconds.
+</Accordion>
+
+
 ## Using assertCondition() and waitUntil()
 **How it works:**
 Assert works by taking a screenshot of the current screen and sending the screenshot to a vision model, along with your condition. The model evaluates the screenshot against the condition and returns a pass or fail. Wait until uses the assert condition on a loop until the timeout limit is hit.
