@@ -195,18 +195,20 @@ icon: 'timer'
           ```java Groovy/Java
             dependencies {
               // Add this to auto update your package
+              androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
               androidTestImplementation 'com.camelqa:qaml:latest.release' 
               // Alternatively, you can specify one version
-              androidTestImplementation 'com.camelqa:qaml:1.0.2'
+              androidTestImplementation 'com.camelqa:qaml:1.0.6'
             }
           ```
 
           ```kotlin Kotlin DSL
             dependencies {
               // Add this to auto update your package
+              androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
               androidTestImplementation("com.camelqa:qaml:latest.release")
               // Alternatively, you can specify one version
-              androidTestImplementation("com.camelqa:qaml:1.0.2")
+              androidTestImplementation("com.camelqa:qaml:1.0.6")
             }
           ```
           </CodeGroup>
