@@ -76,6 +76,7 @@
     {
       "group": "Trouble Shooting",
       "pages": [
+        "trouble-shooting/observe",
         "trouble-shooting/known-issues",
         "trouble-shooting/icon-list",
         "appium"
