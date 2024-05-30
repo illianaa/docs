@@ -103,6 +103,7 @@ Here is a non-exhaustive list of things you should **avoid doing** in your asser
 - listing out your app, ex. `q.assertCondition("I am in Youtube Shorts")`
 - imprecise description of color, ex. `q.assertCondition("there is a blue send button")` but the button is white with blue lettering. If you are going to use color in your assert, ensure your description is precise.
 - relying on descriptions that require experience with your app, ex. `q.assertCondition("I am in the community playlist page")` but there is no identifying text that says 'community playlist'
+- relying on what is *not* there, ex. `q.assertCondition("there is no modal")`. This can work if it is very obvious, but prompting based on what is not there make hallucination more likely.
 
 **tl;dr**
 assertCondition and waitUntil are very powerful, but require a condition that is obviously evaluated.
