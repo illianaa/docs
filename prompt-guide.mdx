@@ -108,6 +108,28 @@ Here is a non-exhaustive list of things you should **avoid doing** in your asser
 **tl;dr**
 assertCondition and waitUntil are very powerful, but require a condition that is obviously evaluated.
 
+## Tapping Items in a list
+
+Our executor model can get confused when deciding what to tap in a list. For example, `q.execute("tap the first item in the list")` or `q.execute("tap the first item in the search results")` do not produce consistent results.
+
+<Accordion title="Example">
+    ```swift
+    // both of these commands confuse camelQA and produce inconsistent results
+    q.execute("tap the first item in the search results")
+    q.execute("tap 'San Francisco' in the search results")
+    ```
+    <Frame>
+        <img width="228" src="/images/weatherApp-tapListItem.png" />
+    </Frame>
+    camelQA gets confused which element counts as the *first* item and will sometimes choose the text in the text field rather than the search result. 
+
+    Instead, specify the accessibility label of the list (the list is labeled as 'location list' in this example) and the [exact text match](https://docs.camelqa.com/commands#exact-text-match).
+    ```swift
+    // this works to tap the first search result in the example screenshot every time
+    q.execute("tap the first result in the location list, 'San Francisco, CA United States'")
+    ```
+</Accordion>
+
 ## Tapping Images
 **Images are not identified at this time** 
 
