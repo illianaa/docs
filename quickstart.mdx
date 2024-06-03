@@ -63,23 +63,31 @@ icon: 'timer'
         Include `import qaml` at the top of your test file
       </Step>
       <Step title="Create a new test function">
-      Note, this test case will only work if you have Apple News on your device and have opened it at least once before.
+      Note, this test case will only work if you have Apple weather app on your device. 
       Example test:
         ```swift
-        func testAppleNews() throws {
-            // Set the bundle ID of the app you'd like to test
-            let app = XCUIApplication(bundleIdentifier: "com.apple.news")
-            app.launch()
-            
-            let q = QamlClient(apiKey: "<api key>", app: app)
-            
-            q.execute("click the sports tab")
-            q.waitUntil("the sports tab has loaded")
-            q.execute("scroll down")
-            q.execute("tap the first article")
-            q.assertCondition("The screen shows a Get Started button")
+        import XCTest
+        import qaml
+
+        final class test_sampleTest: XCTestCase {
+
+            func test_weatherApp_weatherInSF() throws {
+                let app = XCUIApplication(bundleIdentifier: "com.apple.weather")
+                app.launch()
+                
+                let q = QamlClient(
+                    apiKey: "<API_KEY>",
+                    app: app
+                )
+                
+                q.execute("click the location list button")
+                q.execute("tap the search bar at the top")
+                q.execute("type San Francisco")
+                q.execute("tap the first result in the location list, 'San Francisco, CA United States'")
+                q.assertCondition("The screen shows the weather for San Francisco")
+            }
         }
-    ```
+      ```
       </Step>
       <Step title="Select your device">
         Select the device you'd like to run your test on at the top. 
@@ -258,7 +266,7 @@ icon: 'timer'
       <Step title="Import qaml to your Android Instrumented Tests">
         Locate the correct file. App > Kotlin+Java > com.your.package.name (androidTest)
         
-        Import qaml and create your first test. Note, `myFirstTest` is intended to run on a simulated Pixel 3a starting from the homescreen with the search bar visible and Youtube app installed.
+        Import qaml and create your first test. Note, `myFirstTest` requires the Youtube app to be installed.
         <CodeGroup>
           ```java Java
             import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -277,10 +285,12 @@ icon: 'timer'
               public void myFirstTest() {
                 // replace with your API_KEY
                 Client q = new Client("<API_KEY>");
-                q.execute("tap the search bar at the bottom")
-                q.execute("type Youtube")
-                q.execute("tap the Youtube app under the search bar")
-                q.assertCondition("Youtube app is open")
+                q.launchApp("com.google.android.youtube")
+                q.execute("tap the 'Shorts' tab in the bottom nav bar")
+                q.assertCondition("The screenshot is of a video app. It shows a video or image. The bottom section of the screen shows the video's title, the creator's username. On the right there are options to like, dislike, comment, and share.")
+                q.execute("tap the view comments button")
+                q.assertCondition("The screen shows an app with a drawer of comments open that takes up most of the screen")
+                q.execute("tap the close button")
               }
             }
           ```
@@ -301,10 +311,12 @@ icon: 'timer'
               fun myFirstTest() {
                 // replace with your API_KEY
                 val q = QamlClient(apiKey = "<API_KEY>")
-                q.execute("tap the search bar at the bottom")
-                q.execute("type Youtube")
-                q.execute("tap the Youtube app under the search bar")
-                q.assertCondition("Youtube app is open")
+                q.launchApp("com.google.android.youtube")
+                q.execute("tap the 'Shorts' tab in the bottom nav bar")
+                q.assertCondition("The screenshot is of a video app. It shows a video or image. The bottom section of the screen shows the video's title, the creator's username. On the right there are options to like, dislike, comment, and share.")
+                q.execute("tap the view comments button")
+                q.assertCondition("The screen shows an app with a drawer of comments open that takes up most of the screen")
+                q.execute("tap the close button")
               }
             }
           ```
