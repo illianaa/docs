@@ -191,7 +191,7 @@ This calls `assert_condition` on a loop. This is how you tell qaml to wait until
     )
 
     // example:
-    q.waitUntil("Results page has completed loading", timeout: 20.0)
+    q.waitUntil("Results page has completed loading", timeout = 20.0)
     
     ```
     ```java Java
@@ -201,7 +201,7 @@ This calls `assert_condition` on a loop. This is how you tell qaml to wait until
     );
 
     // example:
-    q.waitUntil("Results page has completed loading", timeout: 20.0);
+    q.waitUntil("Results page has completed loading", timeout = 20.0);
     
     ```
     
@@ -235,31 +235,31 @@ This appends information to the qaml system prompt. Use this to specify details 
 </CodeGroup>
 
 ## autoDelay
-This adds a delay between each command. Use this if your app has long animations or you want to add a delay between each action. 
+This adds a delay between each command. Use this if your app has long animations or you want to add a delay between each action. By default, this value is 0.
 
-autoDelay **only affects the code after the statement**. This means you can switch this value throughout your test script.
+autoDelay is set at the client level and is synchronous, as in it **only affects the code after the statement**. This means you can switch this value throughout your test script. If you re-initialize the client, it is reset to zero.
 
 Note, this is purely additive. This does not guarantee that the delay between each step will be exactly the time specified; it simply ensures that there will be a time delay before an action begins.
 
 <CodeGroup>
     ```swift iOS
-    q.autoDelay = <TimeInterval> // specify in seconds
+    q.autoDelay = <TimeInterval> // specify in seconds, takes a floating point
 
     // example:
-    q.autoDelay = 20
+    q.autoDelay = 20.0
     ```
 
     ```kotlin Kotlin
-    q.autoDelay = <TimeInterval> // specify in seconds
+    q.autoDelay = <TimeInterval> // specify in seconds, takes a floating point
 
     // example:
-    q.autoDelay = 20
+    q.autoDelay = 20.0
     ```
     ```java Java
-    q.setAutoDelay(<TimeInterval>); // specify in seconds
+    q.setAutoDelay(<TimeInterval>); // specify in seconds, takes a floating point
 
     // example:
-    q.autoDelay(20);
+    q.autoDelay(20.0);
     ```
 
     ```python Appium
@@ -333,6 +333,29 @@ This is how to open a specific URL. Be sure to include `https://` in your URL.
     ```java Java
     q.openURL("https://google.com");
     
+    ```
+
+    ```python Appium
+    # not supported in python at this time
+    ```
+</CodeGroup>
+
+## scroll 
+This is how to scroll in a specific direction or to a specific element. Directions available are up, down, left, and right.
+
+<CodeGroup>
+    ```swift iOS
+    q.scroll(direction: <QamlClient.Direction>, until: <String>)
+
+    // example:
+    q.scroll(direction: .down, until: "'Logout' button is visible")
+    ```
+
+    ```kotlin Kotlin
+    # in development
+    ```
+    ```java Java
+    # in development
     ```
 
     ```python Appium
