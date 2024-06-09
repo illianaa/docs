@@ -329,11 +329,11 @@ Be sure to include `https://` in your URL or your custom URL scheme for deeplink
     ```
 
     ```kotlin Kotlin
-    q.openURL("https://google.com")
+    q.openURL(urlString = "https://google.com")
     
     ```
     ```java Java
-    q.openURL("https://google.com");
+    q.openURL(urlString = "https://google.com");
     
     ```
 
@@ -354,10 +354,16 @@ This is how to scroll in a specific direction or to a specific element. Directio
     ```
 
     ```kotlin Kotlin
-    # in development
+    q.scroll(direction: Direction, untilCondition: String)
+
+    // example:
+    q.scroll(Client.Direction.DOWN, "'Logout' button is visible")
     ```
     ```java Java
-    # in development
+        q.scroll(direction: Direction, untilCondition: String)
+
+    // example:
+    q.scroll(Client.Direction.DOWN, "'Logout' button is visible")
     ```
 
     ```python Appium
