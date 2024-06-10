@@ -84,21 +84,23 @@ To Initialize a python client for camelQA, you must pass in an API key and optio
 
 This is the main way you interact with qaml. Give a natural language command and it will execute the command. 
 
+Optionally, you can provide a **count** to repeat the action a certain amount of times.
+
 <CodeGroup>
-    ```swift iOS
-    q.execute("swipe down")
+    ```swift iOS    
+    q.execute("swipe down", count: 4)
     q.execute("tap the search bar")
     ```
 
 
 
     ```kotlin Kotlin
-    q.execute("swipe up")
+    q.execute("swipe up", count = 4)
     q.execute("tap the search bar")
     
     ```
     ```java Java
-    q.execute("swipe up");
+    q.execute("swipe up", count = 4);
     q.execute("tap the search bar");
     
     ```
@@ -360,10 +362,108 @@ This is how to scroll in a specific direction or to a specific element. Directio
     q.scroll(Client.Direction.DOWN, "'Logout' button is visible")
     ```
     ```java Java
-        q.scroll(direction: Direction, untilCondition: String)
+        q.scroll(direction: Direction, untilCondition: String);
 
     // example:
-    q.scroll(Client.Direction.DOWN, "'Logout' button is visible")
+    q.scroll(Client.Direction.DOWN, "'Logout' button is visible");
+    ```
+
+    ```python Appium
+    # not supported in python at this time
+    ```
+</CodeGroup>
+
+## getValue 
+This is how to retrieve a value from the app. This returns a string.
+
+There are two modes you can use, **screen shot** and **element list**. 
+
+Screen shot uses vision to parse out the information you requested. This is a smarter model and capable of more complex asks. However, this is slower and does not have access to element labels or IDs.
+
+Element list does not use vision. It is a simpler model that parses the element list to return the value you've requested. This is faster than screen shot mode and can access element labels and IDs.
+
+<CodeGroup>
+    ```swift iOS
+    q.launchApp("com.apple.weather")
+    
+    let weatherDescription = q.getValue(searchFor: "The high tomorrow", mode: .screenShot)
+    ```
+
+    ```kotlin Kotlin
+    q.switchToApp("com.weather.Weather")
+
+    val weatherDescription = q.getValue("get the 'feels like' temperature", Client.SearchMode.SCREENSHOT)
+    ```
+    ```java Java
+    q.switchToApp("com.weather.Weather");
+
+    String weatherDescription = q.getValue("get the 'feels like' temperature", Client.SearchMode.SCREENSHOT);
+    ```
+
+    ```python Appium
+    # not supported in python at this time
+    ```
+</CodeGroup>
+
+## alertHandler
+This is how to handle system alerts automatically. 
+
+Note, iOS handles alerts across all applications. Android only handles the alerts of the target app. 
+
+<CodeGroup>
+    ```swift iOS
+    // By default the handler is on and accepts all permissions.
+
+    // To set a custom alert handler set the alertHandler property on the qaml client object:
+    q.alertHandler = "Accept all permissions except for location"
+
+    // To disable this feature completely, set the alertHandler property to nil:
+q.alertHandler = nil
+    ```
+
+    ```kotlin Kotlin
+    // add QamlTest() to the declaration of the test suite
+    class PermissionsTest: QamlTest() {
+
+        // all tests defined within the test suite will auto accept system pop ups
+        @Test
+        fun testWithPermissions() {
+            ...
+        }
+        ...
+    }
+    ```
+    ```java Java
+    // Add QamlTest() to the declaration of the test suite
+    public class PermissionsTest extends QamlTest {
+        
+        // All tests defined within the test suite will auto accept system pop ups
+        @Test
+        public void testWithPermissions() {
+            ...
+        }
+        ...
+    }
+    ```
+
+    ```python Appium
+    # not supported in python at this time
+    ```
+</CodeGroup>
+
+## dumpAccessibilityElements
+This will dump all accessibility elements for the current screen to the console. This is used for debugging and does not perform any actions.
+
+<CodeGroup>
+    ```swift iOS
+    q.dumpAccessibilityElements()
+    ```
+
+    ```kotlin Kotlin
+    q.dumpAccessibilityElements()
+    ```
+    ```java Java
+    q.dumpAccessibilityElements();
     ```
 
     ```python Appium
