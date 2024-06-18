@@ -25,7 +25,7 @@ To Initialize a python client for camelQA, you must pass in an API key and optio
         This is the [bundleID](https://offcornerdev.com/bundleid.html) of the app you'd like to launch. **Note** you can still switch between apps by using switchToApp or openURL.
 
         #### useAccessibilityElements
-        Tests executed in XCUITest can utilize accessibility labels. Setting this to true leverages accessibility and setting this to false disables the feature. 
+        Tests executed in XCUITest can utilize accessibility labels. Setting this to true leverages accessibility elements. Setting this to false uses pure vision. 
     </Tab>
 
 
@@ -34,18 +34,25 @@ To Initialize a python client for camelQA, you must pass in an API key and optio
         ```java Java
             @Test
             public void newTest() {
-                Client q = new Client("<APIKey>");
+                Client q = new Client(
+                    "<APIKey>",
+                    useAccessibilityElements = <BOOL, default = true>
+                )
             }
         ```
         ```kotlin Kotlin
             @Test
             fun newTest() {
-                val q = QamlClient(apiKey = "<APIKey>")
+                val q = QamlClient(
+                    apiKey = "<APIKey>",
+                    useAccessibilityElements = <BOOL, default = true>
+                )
             }
         ```
         </CodeGroup>
 
-        There are no additional fields for the Android client at this time.
+        #### useAccessibilityElements
+        Tests executed in Android Studio can utilize accessibility labels. Setting this to true leverages accessibility elements. Setting this to false uses pure vision. 
     </Tab>
 
 
